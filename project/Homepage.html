@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falaknuma — Royal Hyderabadi Cuisine</title>
+  <meta name="description" content="Falaknuma celebrates the artistry, patience, and hospitality that define authentic Hyderabadi cuisine. Reserve your table in Bengaluru.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="falaknuma.css">
+  <style>
+    /* ── Tweaks panel ── */
+    #tweaks-panel {
+      display: none; position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      background: rgba(10,7,5,0.96); backdrop-filter: blur(20px);
+      border: 1px solid rgba(199,170,144,0.18); padding: 28px 28px 24px;
+      width: 260px; box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    #tweaks-panel.open { display: block; }
+    .tw-title {
+      font-family: var(--ff-b); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--beige);
+      opacity: 0.7; margin-bottom: 24px; display: flex; justify-content: space-between;
+    }
+    .tw-close {
+      background: none; border: none; color: rgba(199,170,144,0.5);
+      cursor: pointer; font-size: 16px; line-height: 1; padding: 0;
+      transition: color 200ms;
+    }
+    .tw-close:hover { color: var(--beige); }
+    .tw-group { margin-bottom: 22px; }
+    .tw-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(199,170,144,0.45); display: block; margin-bottom: 10px;
+    }
+    .tw-swatches { display: flex; gap: 10px; }
+    .tw-swatch {
+      width: 32px; height: 32px; border-radius: 0; cursor: pointer;
+      border: 2px solid transparent; transition: border-color 200ms;
+    }
+    .tw-swatch.active { border-color: #fff; }
+    .tw-opts { display: flex; gap: 2px; }
+    .tw-opt {
+      flex: 1; padding: 9px 8px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08); color: rgba(233,223,216,0.55);
+      font-family: var(--ff-b); font-size: 11px; letter-spacing: 0.1em; cursor: pointer;
+      text-align: center; transition: all 200ms;
+    }
+    .tw-opt.active, .tw-opt:hover { background: rgba(199,170,144,0.15); color: var(--sand); border-color: rgba(199,170,144,0.3); }
+    .tw-toggle-btn {
+      position: fixed; bottom: 28px; right: 28px; z-index: 199;
+      background: rgba(10,7,5,0.9); border: 1px solid rgba(199,170,144,0.2);
+      color: rgba(199,170,144,0.6); font-family: var(--ff-b);
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 11px 18px; cursor: pointer; transition: all 300ms;
+      backdrop-filter: blur(12px);
+    }
+    .tw-toggle-btn:hover { color: var(--beige); border-color: rgba(199,170,144,0.45); }
+    .tw-toggle-btn.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo" aria-label="Falaknuma home" style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;">
+    <span style="font-family:var(--ff-d);font-size:20px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#fff;line-height:1;">Falaknuma</span>
+    <span style="font-family:var(--ff-b);font-size:8px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(199,170,144,0.65);line-height:1;">Royal Cuisine</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="Menu.html">The Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="Contact.html">Contact</a></li>
+  </ul>
+  <a href="Contact.html#reservation" class="nav-btn">Reserve a Table</a>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content" id="heroContent">
+    <p class="h-eyebrow">Kalyan Nagar · Bengaluru</p>
+    <h1 class="h-title">Falaknuma</h1>
+    <div class="h-rule">
+      <span class="h-rule-line"></span>
+      <span class="h-rule-gem">✦</span>
+      <span class="h-rule-line"></span>
+    </div>
+    <p class="h-tagline">Rooted in Tradition. Served with Soul.</p>
+    <div class="h-actions">
+      <a href="#reservation" class="btn-outline">Reserve a Table</a>
+      <a href="#dishes" class="btn-text">Explore the Experience</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ STORY -->
+<section id="story">
+  <div class="story-wrap">
+    <!-- Text -->
+    <div class="reveal">
+      <span class="sec-label">Our Heritage</span>
+      <h2 class="story-headline">A Palace Table,<br><em>Reimagined.</em></h2>
+      <p class="story-body">
+        Falaknuma draws its name from the legendary palace above the clouds — Hyderabad's most revered symbol of Nizami grandeur. We bring the royal kitchens of the Nawabs to Bengaluru: recipes preserved across centuries, crafted with the patience and artistry that define authentic Hyderabadi cuisine.
+      </p>
+      <a href="#" class="link-arrow">Discover Our Story →</a>
+    </div>
+    <!-- Imagery -->
+    <div class="story-imagery reveal d2">
+      <div class="si-main">
+        <image-slot
+          id="story-main"
+          placeholder="Restaurant interior — warm, candlelit"
+          shape="rect"
+          style="width:100%;height:100%;display:block;">
+        </image-slot>
+      </div>
+      <div class="si-accent">
+        <image-slot
+          id="story-accent"
+          placeholder="Close-up — saffron / spice / copper"
+          shape="rect"
+          style="width:100%;height:100%;display:block;">
+        </image-slot>
+      </div>
+      <div class="si-badge">
+        <span class="si-n">300<sup style="font-size:0.42em;vertical-align:super;">+</sup></span>
+        <span class="si-l">Years of<br>Royal Tradition</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SIGNATURE DISHES -->
+<section id="dishes">
+  <div class="dishes-inner">
+    <div class="dishes-hd reveal">
+      <h2 class="dishes-headline">Crafted for the<br>Discerning Palate</h2>
+      <p class="dishes-note">Three journeys through the flavours of the Hyderabadi royal court.</p>
+    </div>
+
+    <div class="dishes-grid">
+      <!-- Card 1 -->
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <image-slot id="dish-1" placeholder="Dum Biryani — hero dish, steam rising" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="dish-overlay"></div>
+        <span class="dish-num">01</span>
+        <span class="dish-corner">↗</span>
+        <div class="dish-body">
+          <h3 class="dish-name">The Dum<br>Biryani</h3>
+          <p class="dish-desc">Slow-cooked in a sealed handi over twelve hours — saffron, aged basmati, and the patience of a royal kitchen.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="dish-card reveal d1">
+        <div class="dish-card-img">
+          <image-slot id="dish-2" placeholder="Pathar Kebab — charcoal, moody light" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="dish-overlay"></div>
+        <span class="dish-num">02</span>
+        <span class="dish-corner">↗</span>
+        <div class="dish-body">
+          <h3 class="dish-name">The Kebab<br>Ceremony</h3>
+          <p class="dish-desc">Pathar kebab, Shikampuri, Boti — live charcoal, spices sourced from the old markets of Charminar.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="dish-card reveal d2">
+        <div class="dish-card-img">
+          <image-slot id="dish-3" placeholder="Royal Thali — full spread, overhead" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="dish-overlay"></div>
+        <span class="dish-num">03</span>
+        <span class="dish-corner">↗</span>
+        <div class="dish-body">
+          <h3 class="dish-name">The Royal<br>Thali</h3>
+          <p class="dish-desc">Twelve courses — the complete Hyderabadi royal spread, served with ceremony and reverence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ART OF DUM -->
+<section id="dum">
+  <div class="dum-pat"></div>
+  <div class="dum-inner">
+    <span class="sec-label sec-label--light reveal" style="margin-bottom:44px;">The Philosophy</span>
+    <h2 class="dum-headline reveal d1">The Art<br>of Dum.</h2>
+    <p class="dum-body reveal d2">
+      Dum — the ancient technique of slow-cooking within a sealed vessel — is not a method. It is a ritual. Every dish that leaves our kitchen carries the patience of centuries, the warmth of the subcontinent, and the precision of a royal chef's hand.
+    </p>
+    <div class="dum-stats reveal d3">
+      <div class="dum-stat">
+        <span class="ds-n">12</span>
+        <span class="ds-l">Hours of slow cooking</span>
+      </div>
+      <div class="dum-stat">
+        <span class="ds-n">47</span>
+        <span class="ds-l">Heritage spices</span>
+      </div>
+      <div class="dum-stat">
+        <span class="ds-n">3</span>
+        <span class="ds-l">Generations of craft</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-hd reveal">
+      <span class="sec-label">Ambience &amp; Interiors</span>
+      <h2 class="gallery-headline">Where Every Corner<br>Tells a Story</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gi gi1 reveal">
+        <image-slot id="g1" placeholder="Dining room — wide, atmospheric" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+      <div class="gi gi2 reveal d1">
+        <image-slot id="g2" placeholder="Dum handi — steam rising" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+      <div class="gi gi3 reveal d2">
+        <image-slot id="g3" placeholder="Architectural detail / jali" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+      <div class="gi gi4 reveal">
+        <image-slot id="g4" placeholder="Biryani reveal — handi open" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+      <div class="gi gi5 reveal d1">
+        <image-slot id="g5" placeholder="Table setting — copper, candlelight" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+      <div class="gi gi6 reveal d2">
+        <image-slot id="g6" placeholder="Courtyard / entrance" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ RESERVATION -->
+<section id="reservation">
+  <div class="res-glow"></div>
+  <div class="res-inner">
+    <span class="sec-label sec-label--light reveal" style="margin-bottom:52px;">Reservations</span>
+    <h2 class="res-headline reveal d1">Begin Your<br>Royal Experience.</h2>
+    <p class="res-sub reveal d2">
+      We welcome guests for lunch and dinner at Kalyan Nagar, Bengaluru. To secure your preferred table, we recommend reserving at least five days in advance.
+    </p>
+    <div class="res-actions reveal d3">
+      <a href="#" class="btn-saffron">Reserve a Table</a>
+      <a href="#" class="btn-text" style="color:rgba(255,255,255,0.52);">Enquire for Private Events</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <p class="ft-logo">Falaknuma</p>
+        <p class="ft-tagline">Royal Hyderabadi cuisine — the artistry, patience, and hospitality of the Nizam's palace kitchen. Now in Bengaluru.</p>
+      </div>
+      <div>
+        <span class="ft-col-title">Navigate</span>
+        <ul class="ft-links">
+          <li><a href="Homepage.html">Home</a></li>
+          <li><a href="Menu.html">The Menu</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Reserve</span>
+        <ul class="ft-links">
+          <li><a href="Contact.html#reservation">Table Booking</a></li>
+          <li><a href="Contact.html#private">Private Events</a></li>
+          <li><a href="Contact.html#private">Corporate Dining</a></li>
+          <li><a href="mailto:reservations@falaknuma.in">Gift Experiences</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Visit</span>
+        <ul class="ft-links">
+          <li><a href="#">Kalyan Nagar, Kamannahalli</a></li>
+          <li><a href="#">Bengaluru, Karnataka</a></li>
+          <li><a href="#">reservations@falaknuma.in</a></li>
+          <li><a href="#">+91 80 0000 0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-copy">© 2025 Falaknuma Royal Cuisine. All rights reserved.</p>
+      <div class="ft-social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════ TWEAKS -->
+<button class="tw-toggle-btn" id="twToggle">Tweaks</button>
+<div id="tweaks-panel">
+  <div class="tw-title">
+    <span>Tweaks</span>
+    <button class="tw-close" id="twClose">×</button>
+  </div>
+  <div class="tw-group">
+    <span class="tw-label">Accent Colour</span>
+    <div class="tw-swatches">
+      <div class="tw-swatch active" data-accent="#A53A16" style="background:#A53A16;" title="Burnt Saffron"></div>
+      <div class="tw-swatch" data-accent="#7A001B" style="background:#7A001B;" title="Burgundy Reserve"></div>
+      <div class="tw-swatch" data-accent="#8B6914" style="background:#8B6914;" title="Antique Gold"></div>
+    </div>
+  </div>
+  <div class="tw-group">
+    <span class="tw-label">Hero Style</span>
+    <div class="tw-opts">
+      <button class="tw-opt active" data-hero="warm">Warm</button>
+      <button class="tw-opt" data-hero="cool">Midnight</button>
+    </div>
+  </div>
+  <div class="tw-group">
+    <span class="tw-label">Section Spacing</span>
+    <div class="tw-opts">
+      <button class="tw-opt active" data-space="regular">Regular</button>
+      <button class="tw-opt" data-space="airy">Airy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ SCRIPTS -->
+<script src="image-slot.js"></script>
+<script>
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => document.body.classList.add('ready'), 80);
+  });
+
+  /* ── Nav ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Hero parallax ── */
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight * 1.4) {
+      heroBg.style.transform = `translateY(${y * 0.32}px)`;
+    }
+  }, { passive: true });
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Tweaks ── */
+  const twPanel  = document.getElementById('tweaks-panel');
+  const twToggle = document.getElementById('twToggle');
+  const twClose  = document.getElementById('twClose');
+
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode')   twPanel.classList.add('open'),  twToggle.classList.add('hidden');
+    if (e.data?.type === '__deactivate_edit_mode') twPanel.classList.remove('open'), twToggle.classList.remove('hidden');
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  twToggle.addEventListener('click', () => {
+    twPanel.classList.add('open'); twToggle.classList.add('hidden');
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+  });
+  twClose.addEventListener('click', () => {
+    twPanel.classList.remove('open'); twToggle.classList.remove('hidden');
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  });
+
+  /* accent colour */
+  document.querySelectorAll('.tw-swatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('.tw-swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      document.documentElement.style.setProperty('--saffron', sw.dataset.accent);
+    });
+  });
+
+  /* hero style */
+  document.querySelectorAll('[data-hero]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-hero]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const warm = 'radial-gradient(ellipse at 30% 60%, rgba(165,58,22,0.22) 0%, transparent 48%), radial-gradient(ellipse at 72% 22%, rgba(199,170,144,0.08) 0%, transparent 38%), radial-gradient(ellipse at 55% 85%, rgba(122,0,27,0.12) 0%, transparent 35%), linear-gradient(175deg, #110c09 0%, #0A0705 55%, #0e0709 100%)';
+      const cool = 'radial-gradient(ellipse at 30% 60%, rgba(0,40,80,0.30) 0%, transparent 48%), radial-gradient(ellipse at 72% 22%, rgba(100,130,180,0.06) 0%, transparent 38%), linear-gradient(175deg, #060b10 0%, #050709 55%, #080a0d 100%)';
+      heroBg.style.background = btn.dataset.hero === 'warm' ? warm : cool;
+    });
+  });
+
+  /* spacing */
+  document.querySelectorAll('[data-space]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-space]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const pad = btn.dataset.space === 'airy' ? '180px' : '128px';
+      document.querySelectorAll('#story,#dishes,#dum,#gallery,#reservation').forEach(s => {
+        s.style.paddingTop = pad; s.style.paddingBottom = pad;
+      });
+    });
+  });
+</script>
+</body>
+</html>

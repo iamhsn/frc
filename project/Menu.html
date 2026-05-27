@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — Falaknuma Royal Cuisine</title>
+  <meta name="description" content="A curated journey through timeless flavours, heritage recipes, and the ceremonial craft of authentic Hyderabadi cuisine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="falaknuma.css">
+  <style>
+  /* ═══════════════════════════════════════════════
+     MENU PAGE — FALAKNUMA
+  ═══════════════════════════════════════════════ */
+
+  /* ── Hero ── */
+  #menu-hero {
+    height: 100vh; min-height: 700px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; background: var(--ink);
+  }
+  .mh-bg-wrap {
+    position: absolute; inset: 0; overflow: hidden;
+  }
+  .mh-bg-wrap image-slot {
+    width: 100%; height: 100%; display: block;
+    animation: mhZoom 24s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  @keyframes mhZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .mh-overlay {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 22% 64%, rgba(165,58,22,0.32) 0%, transparent 46%),
+      radial-gradient(ellipse at 76% 22%, rgba(122,0,27,0.2) 0%, transparent 42%),
+      linear-gradient(165deg, rgba(16,10,7,0.86) 0%, rgba(10,7,5,0.74) 45%, rgba(12,6,8,0.9) 100%);
+  }
+  .mh-vignette {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(10,7,5,0.28) 0%, transparent 30%, rgba(10,7,5,0.82) 100%);
+  }
+  .mh-pattern {
+    position: absolute; inset: 0; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect x='1' y='1' width='78' height='78' fill='none' stroke='%23C7AA90' stroke-width='0.5'/%3E%3Cpolygon points='40,3 77,40 40,77 3,40' fill='none' stroke='%23C7AA90' stroke-width='0.5'/%3E%3Ccircle cx='40' cy='40' r='22' fill='none' stroke='%23C7AA90' stroke-width='0.4'/%3E%3C/svg%3E");
+  }
+  .mh-content {
+    position: relative; z-index: 2; text-align: center; padding: 0 48px;
+    max-width: 960px;
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+  }
+  body.ready .mh-content { opacity: 1; transform: none; }
+  .mh-eyebrow {
+    font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase;
+    color: rgba(199,170,144,0.52); display: block; margin-bottom: 50px;
+  }
+  .mh-title {
+    font-family: var(--ff-d); font-size: clamp(40px, 6.2vw, 84px);
+    font-weight: 700; color: #fff; line-height: 1.0;
+    text-wrap: balance; margin-bottom: 40px;
+  }
+  .mh-rule { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 28px; }
+  .mh-rule-line { width: 52px; height: 1px; background: rgba(199,170,144,0.28); }
+  .mh-rule-gem { font-size: 10px; color: var(--beige); opacity: 0.5; }
+  .mh-sub {
+    font-family: var(--ff-d); font-style: italic;
+    font-size: clamp(16px, 1.8vw, 21px);
+    color: rgba(255,255,255,0.42); line-height: 1.74;
+    max-width: 580px; margin: 0 auto;
+  }
+
+  /* ── Category Nav ── */
+  #cat-nav {
+    position: sticky; top: 76px; z-index: 90;
+    background: rgba(10,7,5,0.97); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(199,170,144,0.08);
+  }
+  .cat-inner {
+    max-width: 1380px; margin: 0 auto;
+    display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 56px;
+  }
+  .cat-inner::-webkit-scrollbar { display: none; }
+  .cat-lnk {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(199,170,144,0.34); padding: 20px 22px; white-space: nowrap;
+    background: none; border: none; cursor: pointer; position: relative;
+    transition: color 300ms;
+  }
+  .cat-lnk::after {
+    content: ''; position: absolute; bottom: 0; left: 22px; right: 22px; height: 1px;
+    background: var(--saffron); transform: scaleX(0); transition: transform 360ms var(--ease);
+  }
+  .cat-lnk.active { color: var(--beige); }
+  .cat-lnk.active::after { transform: scaleX(1); }
+  .cat-lnk:hover { color: rgba(199,170,144,0.65); }
+
+  /* ── Narrative ── */
+  #narrative { background: var(--cream); padding: 144px 56px; text-align: center; }
+  .narr-inner { max-width: 800px; margin: 0 auto; }
+  .narr-quote {
+    font-family: var(--ff-d); font-style: italic;
+    font-size: clamp(21px, 2.2vw, 28px); font-weight: 500;
+    line-height: 1.74; color: rgba(42,42,42,0.72);
+    text-wrap: balance; margin-bottom: 60px;
+  }
+  .narr-rule { width: 1px; height: 72px; background: rgba(165,58,22,0.28); margin: 0 auto; }
+
+  /* ── Signatures ── */
+  #signatures { background: var(--ink); padding: 144px 0 4px; }
+  .sig-hd { text-align: center; padding: 0 56px 104px; }
+  .sig-headline {
+    font-family: var(--ff-d); font-size: clamp(48px, 6.2vw, 84px);
+    font-weight: 700; color: #fff; line-height: 0.93; margin-bottom: 20px;
+  }
+  .sig-sub {
+    font-size: 15px; font-weight: 300; color: rgba(199,170,144,0.42);
+    max-width: 440px; margin: 0 auto; line-height: 1.84;
+  }
+  .sig-item {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 660px; margin-bottom: 3px;
+  }
+  .sig-item.rev { direction: rtl; }
+  .sig-item.rev > * { direction: ltr; }
+  .sig-img { position: relative; overflow: hidden; background: #0d0807; }
+  .sig-img image-slot {
+    width: 100%; height: 100%; display: block; transition: transform 950ms var(--ease);
+  }
+  .sig-item:hover .sig-img image-slot { transform: scale(1.04); }
+  .sig-text {
+    padding: 88px 76px; background: #0d0807;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .sig-item:nth-child(even) .sig-text { background: #0a0705; }
+  .st-idx {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(199,170,144,0.25); display: block; margin-bottom: 38px;
+  }
+  .st-name {
+    font-family: var(--ff-d); font-size: clamp(38px, 3.6vw, 54px);
+    font-weight: 700; color: #fff; line-height: 1.0; margin-bottom: 22px;
+  }
+  .st-desc {
+    font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.46);
+    line-height: 1.9; margin-bottom: 26px; max-width: 380px;
+  }
+  .st-note {
+    font-family: var(--ff-d); font-style: italic; font-size: 15px;
+    color: rgba(199,170,144,0.58); line-height: 1.72; margin-bottom: 44px;
+    padding-left: 18px; border-left: 1px solid rgba(165,58,22,0.45); max-width: 360px;
+  }
+  .st-price { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(199,170,144,0.32); }
+  .st-price strong {
+    font-family: var(--ff-d); font-size: 20px; font-weight: 400;
+    color: rgba(233,223,216,0.55); letter-spacing: 0; display: block; margin-top: 5px;
+  }
+
+  /* ── Biryani Collection ── */
+  #biryani { background: var(--sand); padding: 152px 56px; }
+  .biry-wrap { max-width: 1380px; margin: 0 auto; }
+  .biry-hd { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 96px; align-items: end; }
+  .biry-hl {
+    font-family: var(--ff-d); font-size: clamp(52px, 7vw, 96px);
+    font-weight: 700; color: var(--charcoal); line-height: 0.9; letter-spacing: -0.01em;
+  }
+  .biry-intro { font-size: 17px; font-weight: 300; color: rgba(42,42,42,0.5); line-height: 1.9; padding-bottom: 6px; }
+  .biry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .biry-item {
+    background: var(--cream); padding: 56px 48px;
+    cursor: pointer; transition: background 380ms var(--ease); position: relative;
+  }
+  .biry-item:hover { background: #ede7df; }
+  .bi-num { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(42,42,42,0.2); display: block; margin-bottom: 26px; }
+  .bi-name {
+    font-family: var(--ff-d); font-size: clamp(27px, 2.5vw, 36px);
+    font-weight: 600; color: var(--charcoal); line-height: 1.02; margin-bottom: 14px;
+  }
+  .bi-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--saffron); opacity: 0.7; display: block; margin-bottom: 18px; }
+  .bi-desc { font-size: 15px; font-weight: 300; color: rgba(42,42,42,0.5); line-height: 1.84; margin-bottom: 38px; }
+  .bi-foot { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 24px; border-top: 1px solid rgba(42,42,42,0.07); }
+  .bi-portions { font-size: 12px; color: rgba(42,42,42,0.35); line-height: 1.9; }
+  .bi-portions em { font-style: normal; color: rgba(42,42,42,0.55); }
+  .bi-arr { font-size: 14px; color: var(--saffron); opacity: 0; transition: opacity 300ms, transform 300ms; }
+  .biry-item:hover .bi-arr { opacity: 1; transform: translateX(4px); }
+
+  /* ── Royal Curries ── */
+  #curries { background: var(--cream); padding: 152px 56px; }
+  .curr-wrap { max-width: 1380px; margin: 0 auto; display: grid; grid-template-columns: 256px 1fr; gap: 88px; }
+  .curr-nav { position: sticky; top: 148px; align-self: start; }
+  .curr-nav-lbl { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(42,42,42,0.26); display: block; margin-bottom: 28px; }
+  .curr-btn {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    font-family: var(--ff-d); font-size: 26px; font-weight: 600;
+    color: rgba(42,42,42,0.2); padding: 14px 0;
+    border-bottom: 1px solid rgba(42,42,42,0.06); cursor: pointer; transition: color 350ms;
+  }
+  .curr-btn:last-child { border-bottom: none; }
+  .curr-btn.active { color: var(--charcoal); }
+  .curr-btn:hover:not(.active) { color: rgba(42,42,42,0.48); }
+  .curr-panel { display: none; }
+  .curr-panel.active { display: block; }
+  .curr-panel-hl {
+    font-family: var(--ff-d); font-size: clamp(42px, 4.8vw, 64px);
+    font-weight: 700; color: var(--charcoal); line-height: 0.93; margin-bottom: 68px;
+  }
+  .curr-item { display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: start; padding: 38px 0; border-top: 1px solid rgba(42,42,42,0.07); }
+  .curr-item:last-child { border-bottom: 1px solid rgba(42,42,42,0.07); }
+  .ci-name { font-family: var(--ff-d); font-size: 25px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+  .ci-desc { font-size: 15px; font-weight: 300; color: rgba(42,42,42,0.48); line-height: 1.84; max-width: 500px; margin-bottom: 10px; }
+  .ci-prov { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--saffron); opacity: 0.6; }
+  .ci-price { font-family: var(--ff-d); font-size: 21px; color: rgba(42,42,42,0.36); white-space: nowrap; padding-top: 4px; }
+
+  /* ── Kebabs ── */
+  #kebabs { background: var(--charcoal); padding: 152px 56px; }
+  .keb-wrap { max-width: 1380px; margin: 0 auto; }
+  .keb-hd { margin-bottom: 84px; }
+  .keb-hl {
+    font-family: var(--ff-d); font-size: clamp(48px, 6vw, 82px);
+    font-weight: 700; color: var(--sand); line-height: 0.93; margin-bottom: 20px;
+  }
+  .keb-sub { font-size: 16px; font-weight: 300; color: rgba(233,223,216,0.32); max-width: 440px; line-height: 1.88; }
+  .keb-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+  .keb-item { background: rgba(255,255,255,0.025); cursor: pointer; }
+  .keb-img { height: 460px; overflow: hidden; position: relative; }
+  .keb-img image-slot { width: 100%; height: 100%; display: block; transition: transform 850ms var(--ease); }
+  .keb-item:hover .keb-img image-slot { transform: scale(1.06); }
+  .keb-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,7,5,0.92) 0%, transparent 52%); }
+  .keb-chef { position: absolute; top: 20px; left: 0; right: 0; padding: 0 22px; opacity: 0; transition: opacity 400ms; }
+  .keb-item:hover .keb-chef { opacity: 1; }
+  .kc-note {
+    font-family: var(--ff-d); font-style: italic; font-size: 13px;
+    color: rgba(199,170,144,0.8); line-height: 1.6;
+    background: rgba(10,7,5,0.72); backdrop-filter: blur(8px); padding: 14px 18px;
+  }
+  .keb-text { padding: 26px 26px 34px; }
+  .kt-name { font-family: var(--ff-d); font-size: 21px; font-weight: 600; color: var(--sand); margin-bottom: 9px; line-height: 1.1; }
+  .kt-desc { font-size: 13px; font-weight: 300; color: rgba(233,223,216,0.36); line-height: 1.76; margin-bottom: 14px; }
+  .kt-price { font-size: 12px; color: rgba(199,170,144,0.42); letter-spacing: 0.04em; }
+
+  /* ── Desserts ── */
+  #desserts { background: var(--ink); padding: 160px 56px; position: relative; overflow: hidden; }
+  .des-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 18% 52%, rgba(122,0,27,0.13) 0%, transparent 44%),
+      radial-gradient(ellipse at 80% 46%, rgba(165,58,22,0.09) 0%, transparent 40%);
+  }
+  .des-wrap { max-width: 1380px; margin: 0 auto; position: relative; z-index: 1; }
+  .des-hd { text-align: center; margin-bottom: 96px; }
+  .des-hl {
+    font-family: var(--ff-d); font-size: clamp(54px, 7.5vw, 104px);
+    font-weight: 700; color: #fff; line-height: 0.9; margin-bottom: 20px;
+  }
+  .des-sub { font-family: var(--ff-d); font-style: italic; font-size: 19px; color: rgba(199,170,144,0.38); line-height: 1.7; }
+  .des-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .des-item { background: rgba(255,255,255,0.02); }
+  .des-img { height: 420px; overflow: hidden; }
+  .des-img image-slot { width: 100%; height: 100%; display: block; transition: transform 950ms var(--ease); }
+  .des-item:hover .des-img image-slot { transform: scale(1.04); }
+  .des-text { padding: 44px 44px 52px; }
+  .dt-idx { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(199,170,144,0.25); display: block; margin-bottom: 24px; }
+  .dt-name { font-family: var(--ff-d); font-size: clamp(28px, 2.8vw, 38px); font-weight: 700; color: #fff; line-height: 1.02; margin-bottom: 16px; }
+  .dt-desc { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.36); line-height: 1.88; margin-bottom: 32px; }
+  .dt-price { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(199,170,144,0.3); }
+  .dt-price strong { font-family: var(--ff-d); font-size: 19px; font-weight: 400; color: rgba(199,170,144,0.56); letter-spacing: 0; display: block; margin-top: 4px; }
+
+  /* ── Chef's Selection ── */
+  #chef { background: var(--sand); padding: 152px 56px; }
+  .chef-wrap { max-width: 1380px; margin: 0 auto; }
+  .chef-hd { text-align: center; margin-bottom: 84px; }
+  .chef-hl { font-family: var(--ff-d); font-size: clamp(44px, 5.5vw, 76px); font-weight: 700; color: var(--charcoal); line-height: 0.93; }
+  .chef-sub { font-size: 16px; font-weight: 300; color: rgba(42,42,42,0.4); max-width: 400px; margin: 22px auto 0; line-height: 1.84; }
+  .chef-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .chef-card { background: var(--cream); padding: 58px 46px 50px; cursor: pointer; transition: background 380ms; }
+  .chef-card:hover { background: #ede7df; }
+  .cc-lbl { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--saffron); opacity: 0.62; display: block; margin-bottom: 22px; }
+  .cc-title { font-family: var(--ff-d); font-size: 25px; font-weight: 600; color: var(--charcoal); line-height: 1.08; margin-bottom: 18px; }
+  .cc-desc { font-size: 14px; font-weight: 300; color: rgba(42,42,42,0.46); line-height: 1.82; margin-bottom: 34px; }
+  .cc-dishes { display: flex; flex-direction: column; gap: 10px; }
+  .cc-dish { font-family: var(--ff-d); font-size: 15px; color: rgba(42,42,42,0.58); padding-left: 14px; position: relative; }
+  .cc-dish::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 1px; background: var(--saffron); opacity: 0.42; }
+
+  /* ── Beverages ── */
+  #beverages { background: var(--cream); padding: 152px 56px; }
+  .bev-wrap { max-width: 1380px; margin: 0 auto; }
+  .bev-hd { margin-bottom: 84px; }
+  .bev-hl { font-family: var(--ff-d); font-size: clamp(46px, 5.8vw, 80px); font-weight: 700; color: var(--charcoal); line-height: 0.93; margin-bottom: 22px; }
+  .bev-intro { font-size: 17px; font-weight: 300; color: rgba(42,42,42,0.46); max-width: 500px; line-height: 1.9; }
+  .bev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .bev-item { padding: 42px 0; border-top: 1px solid rgba(42,42,42,0.08); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+  .bev-item:nth-child(odd) { padding-right: 60px; }
+  .bev-item:nth-child(even) { padding-left: 60px; border-left: 1px solid rgba(42,42,42,0.06); }
+  .bev-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(42,42,42,0.08); }
+  .bv-name { font-family: var(--ff-d); font-size: 21px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+  .bv-desc { font-size: 14px; font-weight: 300; color: rgba(42,42,42,0.42); line-height: 1.72; }
+  .bv-tag { font-size: 9px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--saffron); opacity: 0.58; display: block; margin-top: 7px; }
+  .bv-price { font-family: var(--ff-d); font-size: 20px; color: rgba(42,42,42,0.32); white-space: nowrap; }
+
+  /* ── Tweaks Panel ── */
+  #tw-panel {
+    display: none; position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    background: rgba(10,7,5,0.97); backdrop-filter: blur(20px);
+    border: 1px solid rgba(199,170,144,0.18); padding: 28px 28px 24px;
+    width: 262px; box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  }
+  #tw-panel.open { display: block; }
+  .tw-hd { font-family: var(--ff-b); font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--beige); opacity: 0.7; margin-bottom: 24px; display: flex; justify-content: space-between; }
+  .tw-x { background: none; border: none; color: rgba(199,170,144,0.5); cursor: pointer; font-size: 16px; padding: 0; transition: color 200ms; }
+  .tw-x:hover { color: var(--beige); }
+  .tw-g { margin-bottom: 20px; }
+  .tw-l { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(199,170,144,0.42); display: block; margin-bottom: 10px; }
+  .tw-sws { display: flex; gap: 10px; }
+  .tw-sw { width: 32px; height: 32px; cursor: pointer; border: 2px solid transparent; transition: border-color 200ms; }
+  .tw-sw.on { border-color: #fff; }
+  .tw-os { display: flex; gap: 2px; }
+  .tw-o {
+    flex: 1; padding: 9px 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(233,223,216,0.5); font-family: var(--ff-b); font-size: 11px; letter-spacing: 0.08em;
+    cursor: pointer; text-align: center; transition: all 200ms;
+  }
+  .tw-o.on, .tw-o:hover { background: rgba(199,170,144,0.15); color: var(--sand); border-color: rgba(199,170,144,0.28); }
+  #tw-tog {
+    position: fixed; bottom: 28px; right: 28px; z-index: 199;
+    background: rgba(10,7,5,0.9); border: 1px solid rgba(199,170,144,0.2);
+    color: rgba(199,170,144,0.55); font-family: var(--ff-b);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 11px 18px; cursor: pointer; transition: all 300ms; backdrop-filter: blur(12px);
+  }
+  #tw-tog:hover { color: var(--beige); border-color: rgba(199,170,144,0.44); }
+  #tw-tog.hidden { display: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .sig-item { grid-template-columns: 1fr; min-height: auto; }
+    .sig-item.rev { direction: ltr; }
+    .sig-img { height: 400px; }
+    .sig-text { padding: 52px 40px; }
+    .biry-hd, .biry-grid { grid-template-columns: 1fr; }
+    .curr-wrap { grid-template-columns: 1fr; gap: 48px; }
+    .curr-nav { position: static; }
+    .keb-grid { grid-template-columns: 1fr 1fr; }
+    .des-grid { grid-template-columns: 1fr; }
+    .chef-grid { grid-template-columns: 1fr; gap: 2px; }
+    .bev-grid { grid-template-columns: 1fr; }
+    .bev-item:nth-child(odd) { padding-right: 0; }
+    .bev-item:nth-child(even) { padding-left: 0; border-left: none; }
+  }
+  @media (max-width: 768px) {
+    #narrative, #signatures, #biryani, #curries, #kebabs,
+    #desserts, #chef, #beverages, #reservation { padding-left: 24px !important; padding-right: 24px !important; }
+    .cat-inner { padding: 0 16px; }
+    .sig-text { padding: 40px 24px; }
+    .biry-item, .chef-card { padding: 40px 24px; }
+    .keb-grid { grid-template-columns: 1fr; }
+    .keb-img { height: 300px; }
+    .curr-wrap { gap: 36px; }
+    .curr-btn { font-size: 22px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAV -->
+<nav id="nav">
+  <a href="Homepage.html" class="nav-logo" aria-label="Falaknuma home" style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;">
+    <span style="font-family:var(--ff-d);font-size:20px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#fff;line-height:1;">Falaknuma</span>
+    <span style="font-family:var(--ff-b);font-size:8px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(199,170,144,0.65);line-height:1;">Royal Cuisine</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="Homepage.html#story">Our Story</a></li>
+    <li><a href="Menu.html" style="color:var(--beige);">The Menu</a></li>
+    <li><a href="Homepage.html#gallery">Gallery</a></li>
+    <li><a href="Contact.html">Contact</a></li>
+  </ul>
+  <a href="Contact.html#reservation" class="nav-btn">Reserve a Table</a>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO -->
+<section id="menu-hero">
+  <div class="mh-bg-wrap">
+    <image-slot id="mh-bg" placeholder="Cinematic dum biryani reveal — copper handi, dark steam, moody candlelight" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+  </div>
+  <div class="mh-overlay"></div>
+  <div class="mh-vignette"></div>
+  <div class="mh-pattern"></div>
+  <div class="mh-content">
+    <span class="mh-eyebrow">Kalyan Nagar · Bengaluru</span>
+    <h1 class="mh-title">The Art Of Royal<br>Hyderabadi Dining.</h1>
+    <div class="mh-rule">
+      <span class="mh-rule-line"></span>
+      <span class="mh-rule-gem">✦</span>
+      <span class="mh-rule-line"></span>
+    </div>
+    <p class="mh-sub">A curated journey through timeless flavours, heritage recipes, and the ceremonial craft of authentic Hyderabadi cuisine.</p>
+  </div>
+  <div class="scroll-cue">
+    <span class="scroll-label">Explore</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CATEGORY NAV -->
+<nav id="cat-nav" aria-label="Menu categories">
+  <div class="cat-inner">
+    <button class="cat-lnk active" data-cat="signatures" onclick="scrollTo('signatures')">Signature Experiences</button>
+    <button class="cat-lnk" data-cat="biryani"    onclick="scrollTo('biryani')">The Biryani Collection</button>
+    <button class="cat-lnk" data-cat="curries"    onclick="scrollTo('curries')">Royal Curries</button>
+    <button class="cat-lnk" data-cat="kebabs"     onclick="scrollTo('kebabs')">Kebabs &amp; Starters</button>
+    <button class="cat-lnk" data-cat="desserts"   onclick="scrollTo('desserts')">Desserts</button>
+    <button class="cat-lnk" data-cat="chef"       onclick="scrollTo('chef')">Chef's Selection</button>
+    <button class="cat-lnk" data-cat="beverages"  onclick="scrollTo('beverages')">Beverage Pairings</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ NARRATIVE -->
+<section id="narrative">
+  <div class="narr-inner">
+    <span class="sec-label reveal">A Royal Welcome</span>
+    <p class="narr-quote reveal d1">"At Falaknuma, every dish is rooted in tradition and crafted with patience. Inspired by the royal kitchens of Hyderabad, our menu celebrates timeless flavours elevated through refined hospitality."</p>
+    <div class="narr-rule reveal d2"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SIGNATURES -->
+<section id="signatures" data-cat="signatures">
+  <div class="sig-hd">
+    <h2 class="sig-headline reveal">Signature<br>Experiences</h2>
+    <p class="sig-sub reveal d1">Four icons from our royal kitchen — each a story of heritage, craft, and devotion.</p>
+  </div>
+
+  <!-- 01 -->
+  <div class="sig-item reveal">
+    <div class="sig-img">
+      <image-slot id="sig-1" placeholder="Gosht Dum-e-Azeem — mutton biryani, sealed handi, saffron-gilded rice" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div class="sig-text">
+      <span class="st-idx">01 — Signature</span>
+      <h3 class="st-name">Gosht<br>Dum-e-Azeem</h3>
+      <p class="st-desc">Royal mutton biryani slow-cooked in a sealed handi with aged saffron, caramelised onions, and the heritage spice blends of the Nizam's kitchen.</p>
+      <p class="st-note">"Our defining preparation — twelve hours of patience in every grain."</p>
+      <div class="st-price">From<strong>₹ 480</strong></div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="sig-item rev reveal">
+    <div class="sig-img">
+      <image-slot id="sig-2" placeholder="Marag-e-Azeem — royal mutton broth, delicate steam, copper bowl, saffron threads" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div class="sig-text">
+      <span class="st-idx">02 — Heritage Broth</span>
+      <h3 class="st-name">Marag-e-Azeem</h3>
+      <p class="st-desc">Royal Hyderabadi mutton broth slow-cooked with aromatic spices and timeless culinary tradition — a delicacy once reserved for the Nizam's celebratory table.</p>
+      <p class="st-note">"Saffron sourced from Kashmir. Bones simmered for eight hours."</p>
+      <div class="st-price">Serves one<strong>₹ 685</strong></div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="sig-item reveal">
+    <div class="sig-img">
+      <image-slot id="sig-3" placeholder="Murgh-e-Mehfil — wedding-style chicken curry, rich golden sauce, garnished herbs" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div class="sig-text">
+      <span class="st-idx">03 — Celebratory Curry</span>
+      <h3 class="st-name">Murgh-e-Mehfil</h3>
+      <p class="st-desc">Wedding-style Hyderabadi chicken curry inspired by the celebratory feasts of old Hyderabad — rich, aromatic, and slow-cooked in the tradition of a royal dastarkhwan.</p>
+      <p class="st-note">"A dish that commands the table. Made only in the old way."</p>
+      <div class="st-price">Serves two<strong>₹ 525</strong></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="sig-item rev reveal">
+    <div class="sig-img">
+      <image-slot id="sig-4" placeholder="Sheekh-e-Sultan — chargrilled seekh kebab, live charcoal, dark moody plating" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div class="sig-text">
+      <span class="st-idx">04 — Live Charcoal</span>
+      <h3 class="st-name">Sheekh-e-Sultan</h3>
+      <p class="st-desc">Chargrilled seekh kebab crafted with royal spice traditions — hand-minced meat, Charminar spices, and the discipline of live charcoal. Available in Murgh or Gosht.</p>
+      <p class="st-note">"Grilled on a coal pit open since morning. Finished at the table."</p>
+      <div class="st-price">Per skewer<strong>₹ 420 — ₹ 480</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ BIRYANI -->
+<section id="biryani" data-cat="biryani">
+  <div class="biry-wrap">
+    <div class="biry-hd">
+      <h2 class="biry-hl reveal">The Dum<br>Collection</h2>
+      <p class="biry-intro reveal d1">Crafted through the timeless art of dum cooking, each biryani is layered with aromatic spices, heritage recipes, and slow-cooked perfection.</p>
+    </div>
+    <div class="biry-grid">
+
+      <div class="biry-item reveal">
+        <span class="bi-num">01</span>
+        <h3 class="bi-name">Dum-e-Murgh</h3>
+        <span class="bi-tag">Chicken</span>
+        <p class="bi-desc">Authentic Hyderabadi chicken dum biryani layered with fragrant spices, long-grain basmati, and slow-cooked in a sealed vessel.</p>
+        <div class="bi-foot">
+          <div class="bi-portions">
+            <em>S</em> — ₹ 380<br>
+            <em>Full</em> — ₹ 695<br>
+            <em>Family</em> — ₹ 1,250
+          </div>
+          <span class="bi-arr">→</span>
+        </div>
+      </div>
+
+      <div class="biry-item reveal d1">
+        <span class="bi-num">02</span>
+        <h3 class="bi-name">Gosht Dum-e-Azeem</h3>
+        <span class="bi-tag">Mutton · Signature</span>
+        <p class="bi-desc">Royal mutton biryani slow-cooked with saffron, caramelised onions, and traditional spice blends from the Nizam's kitchen.</p>
+        <div class="bi-foot">
+          <div class="bi-portions">
+            <em>S</em> — ₹ 480<br>
+            <em>Full</em> — ₹ 880<br>
+            <em>Family</em> — ₹ 1,580
+          </div>
+          <span class="bi-arr">→</span>
+        </div>
+      </div>
+
+      <div class="biry-item reveal">
+        <span class="bi-num">03</span>
+        <h3 class="bi-name">Murgh 65-e-Khaas</h3>
+        <span class="bi-tag">Chicken · Fusion</span>
+        <p class="bi-desc">A bold marriage of Hyderabadi dum biryani and the iconic Chicken 65 — fiery, fragrant, and deeply satisfying.</p>
+        <div class="bi-foot">
+          <div class="bi-portions">
+            <em>S</em> — ₹ 395<br>
+            <em>Full</em> — ₹ 740
+          </div>
+          <span class="bi-arr">→</span>
+        </div>
+      </div>
+
+      <div class="biry-item reveal d1">
+        <span class="bi-num">04</span>
+        <h3 class="bi-name">Paneer Dum Biryani</h3>
+        <span class="bi-tag">Vegetarian</span>
+        <p class="bi-desc">Stone-grilled cottage cheese nestled in saffron-laced basmati, slow-cooked in the true dum tradition. A vegetarian celebration.</p>
+        <div class="bi-foot">
+          <div class="bi-portions">
+            <em>S</em> — ₹ 340<br>
+            <em>Full</em> — ₹ 620
+          </div>
+          <span class="bi-arr">→</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CURRIES -->
+<section id="curries" data-cat="curries">
+  <div class="curr-wrap">
+
+    <div class="curr-nav reveal">
+      <span class="curr-nav-lbl">Category</span>
+      <button class="curr-btn active" data-panel="panel-royal">Royal Curries</button>
+      <button class="curr-btn" data-panel="panel-classics">Hyderabadi Classics</button>
+      <button class="curr-btn" data-panel="panel-fusion">Fusion Signatures</button>
+    </div>
+
+    <div class="curr-content">
+
+      <div id="panel-royal" class="curr-panel active">
+        <h2 class="curr-panel-hl reveal">Royal<br>Curries</h2>
+        <div class="curr-item reveal">
+          <div>
+            <p class="ci-name">Murgh-e-Mehfil</p>
+            <p class="ci-desc">Wedding-style Hyderabadi chicken curry inspired by celebratory feasts and slow-cooked spice traditions of the royal court.</p>
+            <span class="ci-prov">Whole spices ground in-house each morning</span>
+          </div>
+          <span class="ci-price">₹ 525</span>
+        </div>
+        <div class="curr-item reveal">
+          <div>
+            <p class="ci-name">Shinwari-e-Sultan</p>
+            <p class="ci-desc">Traditional kadhai-style mutton layered with bold aromatic depth — inspired by the frontier kitchens of the Nizam's court.</p>
+          </div>
+          <span class="ci-price">₹ 580</span>
+        </div>
+        <div class="curr-item reveal">
+          <div>
+            <p class="ci-name">Gosht Rogan Josh</p>
+            <p class="ci-desc">Slow-cooked mutton in a Kashmiri-inflected gravy — rich, warming, and deeply spiced. A regal preparation.</p>
+            <span class="ci-prov">Kashmiri chillies · stone-ground masala</span>
+          </div>
+          <span class="ci-price">₹ 640</span>
+        </div>
+        <div class="curr-item reveal">
+          <div>
+            <p class="ci-name">Dum Ka Murgh</p>
+            <p class="ci-desc">Whole chicken braised in aromatic spices and sealed for the dum — yielding, deeply fragrant, an occasion in itself.</p>
+          </div>
+          <span class="ci-price">₹ 880</span>
+        </div>
+      </div>
+
+      <div id="panel-classics" class="curr-panel">
+        <h2 class="curr-panel-hl">Hyderabadi<br>Classics</h2>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Marag</p>
+            <p class="ci-desc">Tender mutton in a clear, deeply spiced broth — a timeless Hyderabadi delicacy and the cornerstone of our heritage menu.</p>
+            <span class="ci-prov">Slow-simmered for eight hours</span>
+          </div>
+          <span class="ci-price">₹ 685</span>
+        </div>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Paya-e-Nizam</p>
+            <p class="ci-desc">Slow-cooked trotters in a richly spiced heritage broth — gelatinous, warming, and deeply rewarding.</p>
+          </div>
+          <span class="ci-price">₹ 520</span>
+        </div>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Dalcha-e-Hyderabadi</p>
+            <p class="ci-desc">Slow-cooked lentils with mutton and bone marrow — a cornerstone of the Hyderabadi home kitchen, elevated with heritage technique.</p>
+          </div>
+          <span class="ci-price">₹ 380</span>
+        </div>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Bagara Baingan</p>
+            <p class="ci-desc">Whole brinjal braised in a rich peanut-sesame-coconut gravy. A vegetarian icon of the old city.</p>
+            <span class="ci-prov">Vegetarian · heritage recipe</span>
+          </div>
+          <span class="ci-price">₹ 360</span>
+        </div>
+      </div>
+
+      <div id="panel-fusion" class="curr-panel">
+        <h2 class="curr-panel-hl">Fusion<br>Signatures</h2>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Murgh Makhni-e-Nizam</p>
+            <p class="ci-desc">Our refined take on the classic butter chicken — elevated with Kashmiri saffron, double cream, and the restraint of a royal kitchen.</p>
+          </div>
+          <span class="ci-price">₹ 495</span>
+        </div>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Achari Gosht Khaas</p>
+            <p class="ci-desc">Mutton slow-cooked with traditional pickling spices, whisked yoghurt, and the acidity of heritage achaar.</p>
+            <span class="ci-prov">House-pickled spices · mustard oil</span>
+          </div>
+          <span class="ci-price">₹ 580</span>
+        </div>
+        <div class="curr-item">
+          <div>
+            <p class="ci-name">Paneer Tikka Masala Khaas</p>
+            <p class="ci-desc">Stone-grilled cottage cheese in a smoky tomato-cream sauce — a vegetarian signature that holds its own at any royal table.</p>
+            <span class="ci-prov">Vegetarian</span>
+          </div>
+          <span class="ci-price">₹ 420</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ KEBABS -->
+<section id="kebabs" data-cat="kebabs">
+  <div class="keb-wrap">
+    <div class="keb-hd">
+      <h2 class="keb-hl reveal">Kebabs &amp;<br>Starters</h2>
+      <p class="keb-sub reveal d1">Refined sharing plates — live charcoal, Charminar spices, and the ancient craft of the sigri.</p>
+    </div>
+    <div class="keb-grid">
+
+      <div class="keb-item reveal">
+        <div class="keb-img">
+          <image-slot id="keb-1" placeholder="Luqmi — golden pastry pockets, flaky, dark moody table" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+          <div class="keb-grad"></div>
+          <div class="keb-chef"><p class="kc-note">"A Hyderabadi teatime ritual — baked golden, filled richly."</p></div>
+        </div>
+        <div class="keb-text">
+          <p class="kt-name">Luqmi-e-Mehfil</p>
+          <p class="kt-desc">Golden pastry pockets layered with rich Hyderabadi flavours — crisp, savoury, nostalgic.</p>
+          <span class="kt-price">₹ 380 · 4 pieces</span>
+        </div>
+      </div>
+
+      <div class="keb-item reveal d1">
+        <div class="keb-img">
+          <image-slot id="keb-2" placeholder="Sheekh kebab — charcoal grill, deep red glaze, smoke" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+          <div class="keb-grad"></div>
+          <div class="keb-chef"><p class="kc-note">"Hand-minced. Grilled on coal. Served immediately off the sigri."</p></div>
+        </div>
+        <div class="keb-text">
+          <p class="kt-name">Sheekh-e-Sultan</p>
+          <p class="kt-desc">Chargrilled kebabs crafted with royal spice traditions. Murgh or Gosht, to your preference.</p>
+          <span class="kt-price">Murgh ₹ 420 · Gosht ₹ 480</span>
+        </div>
+      </div>
+
+      <div class="keb-item reveal d2">
+        <div class="keb-img">
+          <image-slot id="keb-3" placeholder="Aatish Jhinga — whole prawns, charred, fiery red, dramatic plating" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+          <div class="keb-grad"></div>
+          <div class="keb-chef"><p class="kc-note">"Tiger prawns. Marinated overnight in a fiery red masala."</p></div>
+        </div>
+        <div class="keb-text">
+          <p class="kt-name">Aatish Jhinga</p>
+          <p class="kt-desc">Tiger prawns infused with fiery flavours and refined balance — a showpiece of the live grill.</p>
+          <span class="kt-price">₹ 680 · 4 pieces</span>
+        </div>
+      </div>
+
+      <div class="keb-item reveal d3">
+        <div class="keb-img">
+          <image-slot id="keb-4" placeholder="Pathar gosht — stone-grilled mutton, ancient technique, dark stone surface" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+          <div class="keb-grad"></div>
+          <div class="keb-chef"><p class="kc-note">"Marinated for 24 hours. Cooked on heated basalt stone."</p></div>
+        </div>
+        <div class="keb-text">
+          <p class="kt-name">Pathar Gosht</p>
+          <p class="kt-desc">Thin-sliced mutton cooked on a heated stone — an ancient Hyderabadi technique revived in our kitchen.</p>
+          <span class="kt-price">₹ 580 · serves two</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ DESSERTS -->
+<section id="desserts" data-cat="desserts">
+  <div class="des-glow"></div>
+  <div class="des-wrap">
+    <div class="des-hd">
+      <h2 class="des-hl reveal">Closing<br>The Journey</h2>
+      <p class="des-sub reveal d1">Where nostalgia meets sweetness, and heritage finds its most tender expression.</p>
+    </div>
+    <div class="des-grid">
+
+      <div class="des-item reveal">
+        <div class="des-img">
+          <image-slot id="des-1" placeholder="Qubani ka meetha — apricot halwa, dark bowl, rose petal garnish, warm amber light" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="des-text">
+          <span class="dt-idx">01 — Heritage Dessert</span>
+          <h3 class="dt-name">Qubani-e-Noor</h3>
+          <p class="dt-desc">A timeless Hyderabadi apricot delicacy — sweetened, refined, and finished with a single almond. An heirloom recipe from the royal kitchen.</p>
+          <div class="dt-price">Per serving<strong>₹ 280</strong></div>
+        </div>
+      </div>
+
+      <div class="des-item reveal d1">
+        <div class="des-img">
+          <image-slot id="des-2" placeholder="Shahi tukda — bread pudding, saffron cream, rose water, dramatic dark plating" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="des-text">
+          <span class="dt-idx">02 — Royal Bread Pudding</span>
+          <h3 class="dt-name">Tukda-e-Sultan</h3>
+          <p class="dt-desc">Saffron-infused bread pudding layered with reduced milk, pistachio, and silver leaf — a dessert worthy of the Nizam's table.</p>
+          <div class="dt-price">Per serving<strong>₹ 320</strong></div>
+        </div>
+      </div>
+
+      <div class="des-item reveal">
+        <div class="des-img">
+          <image-slot id="des-3" placeholder="Double ka meetha — fried bread in syrup, close-up, warm golden tones" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="des-text">
+          <span class="dt-idx">03 — Old City Classic</span>
+          <h3 class="dt-name">Double Ka Meetha</h3>
+          <p class="dt-desc">Fried bread soaked in saffron-scented sugar syrup, finished with khoya, cardamom, and a crown of pistachios. Hyderabad's most beloved sweet.</p>
+          <div class="dt-price">Per serving<strong>₹ 240</strong></div>
+        </div>
+      </div>
+
+      <div class="des-item reveal d1">
+        <div class="des-img">
+          <image-slot id="des-4" placeholder="Shahi firni — rice pudding in clay pot, cardamom, edible gold, dark background" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div class="des-text">
+          <span class="dt-idx">04 — Chilled &amp; Delicate</span>
+          <h3 class="dt-name">Shahi Firni</h3>
+          <p class="dt-desc">Set rice pudding scented with cardamom and rose water, served chilled in an earthen bowl. Gentle, considered, and deeply aromatic.</p>
+          <div class="dt-price">Per serving<strong>₹ 260</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CHEF'S SELECTION -->
+<section id="chef" data-cat="chef">
+  <div class="chef-wrap">
+    <div class="chef-hd">
+      <span class="sec-label reveal">Curated by the Kitchen</span>
+      <h2 class="chef-hl reveal d1">Chef's<br>Selection</h2>
+      <p class="chef-sub reveal d2">Guided journeys for every kind of guest — assembled by our head chef to bring out the best of Falaknuma.</p>
+    </div>
+    <div class="chef-grid">
+
+      <div class="chef-card reveal">
+        <span class="cc-lbl">For First-Time Guests</span>
+        <h3 class="cc-title">The Royal Hyderabadi Experience</h3>
+        <p class="cc-desc">A complete introduction to our kitchen — from heritage broth through biryani, with a fitting close.</p>
+        <div class="cc-dishes">
+          <span class="cc-dish">Marag-e-Azeem</span>
+          <span class="cc-dish">Gosht Dum-e-Azeem</span>
+          <span class="cc-dish">Qubani-e-Noor</span>
+        </div>
+      </div>
+
+      <div class="chef-card reveal d1">
+        <span class="cc-lbl">Celebratory Dining</span>
+        <h3 class="cc-title">The Dastarkhwan Selection</h3>
+        <p class="cc-desc">For gatherings that deserve ceremony — a spread that honours the tradition of royal feasting.</p>
+        <div class="cc-dishes">
+          <span class="cc-dish">Dum-e-Murgh (Family)</span>
+          <span class="cc-dish">Murgh-e-Mehfil</span>
+          <span class="cc-dish">Sheekh-e-Sultan</span>
+          <span class="cc-dish">Tukda-e-Sultan</span>
+        </div>
+      </div>
+
+      <div class="chef-card reveal d2">
+        <span class="cc-lbl">Signature Pairing</span>
+        <h3 class="cc-title">The Nizam's Table</h3>
+        <p class="cc-desc">The chef's personal recommendation — a pairing that moves through texture, depth, and sweetness.</p>
+        <div class="cc-dishes">
+          <span class="cc-dish">Gosht Dum-e-Azeem</span>
+          <span class="cc-dish">Paya-e-Nizam</span>
+          <span class="cc-dish">Shahi Firni</span>
+          <span class="cc-dish">Dum Chai</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ BEVERAGES -->
+<section id="beverages" data-cat="beverages">
+  <div class="bev-wrap">
+    <div class="bev-hd">
+      <span class="sec-label reveal">Hospitality &amp; Pairings</span>
+      <h2 class="bev-hl reveal d1">Beverage<br>Pairings</h2>
+      <p class="bev-intro reveal d2">Traditional preparations and curated refreshments — chosen to complement the depth of our kitchen.</p>
+    </div>
+    <div class="bev-grid">
+
+      <div class="bev-item reveal">
+        <div>
+          <p class="bv-name">Shahi Lassi</p>
+          <p class="bv-desc">Thick chilled yoghurt blended with cardamom, saffron, and rose water.</p>
+          <span class="bv-tag">Traditional · Chilled</span>
+        </div>
+        <span class="bv-price">₹ 195</span>
+      </div>
+
+      <div class="bev-item reveal d1">
+        <div>
+          <p class="bv-name">Kesar Sharbat</p>
+          <p class="bv-desc">Saffron, rose, and chilled milk — a cooling royal refresher from the old kitchens.</p>
+          <span class="bv-tag">Saffron · Royal</span>
+        </div>
+        <span class="bv-price">₹ 220</span>
+      </div>
+
+      <div class="bev-item reveal">
+        <div>
+          <p class="bv-name">Dum Chai</p>
+          <p class="bv-desc">Slow-brewed spiced tea — cardamom, cinnamon, clove — served in a copper kulhar.</p>
+          <span class="bv-tag">Hot · Ceremonial</span>
+        </div>
+        <span class="bv-price">₹ 185</span>
+      </div>
+
+      <div class="bev-item reveal d1">
+        <div>
+          <p class="bv-name">Mint Kala Khatta</p>
+          <p class="bv-desc">Herb-forward cooler with raw mango, tamarind, and black salt. Sharp and reviving.</p>
+          <span class="bv-tag">Cooling · Digestif</span>
+        </div>
+        <span class="bv-price">₹ 165</span>
+      </div>
+
+      <div class="bev-item reveal">
+        <div>
+          <p class="bv-name">Coconut Lassi</p>
+          <p class="bv-desc">Chilled coconut and yoghurt blend with a whisper of cardamom and toasted coconut.</p>
+          <span class="bv-tag">Chilled · Light</span>
+        </div>
+        <span class="bv-price">₹ 195</span>
+      </div>
+
+      <div class="bev-item reveal d1">
+        <div>
+          <p class="bv-name">Nimbu Sharbat</p>
+          <p class="bv-desc">House-pressed lime with black salt, cumin, and a touch of honey. The old city's answer to the afternoon heat.</p>
+          <span class="bv-tag">Refresher</span>
+        </div>
+        <span class="bv-price">₹ 155</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ RESERVATION -->
+<section id="reservation">
+  <div class="res-glow"></div>
+  <div class="res-inner">
+    <span class="sec-label sec-label--light reveal" style="margin-bottom:52px;">Reserve Your Table</span>
+    <h2 class="res-headline reveal d1">Reserve Your<br>Royal Experience.</h2>
+    <p class="res-sub reveal d2">We welcome guests for lunch and dinner at Kalyan Nagar, Bengaluru. For the finest experience, we recommend reserving at least five days in advance.</p>
+    <div class="res-actions reveal d3">
+      <a href="#" class="btn-saffron">Reserve a Table</a>
+      <a href="#" class="btn-text" style="color:rgba(255,255,255,0.5);">Enquire for Private Events</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <p class="ft-logo">Falaknuma</p>
+        <p class="ft-tagline">Royal Hyderabadi cuisine — the artistry, patience, and hospitality of the Nizam's palace kitchen. Now in Bengaluru.</p>
+      </div>
+      <div>
+        <span class="ft-col-title">Navigate</span>
+        <ul class="ft-links">
+          <li><a href="Homepage.html">Home</a></li>
+          <li><a href="Menu.html">The Menu</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="Contact.html#reservation">Reservations</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Reserve</span>
+        <ul class="ft-links">
+          <li><a href="Contact.html#reservation">Table Booking</a></li>
+          <li><a href="Contact.html#private">Private Events</a></li>
+          <li><a href="Contact.html#private">Corporate Dining</a></li>
+          <li><a href="mailto:reservations@falaknuma.in">Gift Experiences</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Visit</span>
+        <ul class="ft-links">
+          <li><a href="#">Kalyan Nagar, Kamannahalli</a></li>
+          <li><a href="#">Bengaluru, Karnataka</a></li>
+          <li><a href="#">reservations@falaknuma.in</a></li>
+          <li><a href="#">+91 80 0000 0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-copy">© 2025 Falaknuma Royal Cuisine. All rights reserved.</p>
+      <div class="ft-social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════ TWEAKS -->
+<button id="tw-tog">Tweaks</button>
+<div id="tw-panel">
+  <div class="tw-hd">
+    <span>Tweaks</span>
+    <button class="tw-x" id="tw-x">×</button>
+  </div>
+  <div class="tw-g">
+    <span class="tw-l">Accent Colour</span>
+    <div class="tw-sws">
+      <div class="tw-sw on" data-c="#A53A16" style="background:#A53A16;" title="Burnt Saffron"></div>
+      <div class="tw-sw" data-c="#7A001B" style="background:#7A001B;" title="Burgundy Reserve"></div>
+      <div class="tw-sw" data-c="#8B6914" style="background:#8B6914;" title="Antique Gold"></div>
+    </div>
+  </div>
+  <div class="tw-g">
+    <span class="tw-l">Section Spacing</span>
+    <div class="tw-os">
+      <button class="tw-o on" data-sp="regular">Regular</button>
+      <button class="tw-o" data-sp="airy">Airy</button>
+    </div>
+  </div>
+  <div class="tw-g">
+    <span class="tw-l">Price Display</span>
+    <div class="tw-os">
+      <button class="tw-o on" data-pr="show">Visible</button>
+      <button class="tw-o" data-pr="hide">Hidden</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ SCRIPTS -->
+<script src="image-slot.js"></script>
+<script>
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => document.body.classList.add('ready'), 80);
+  });
+
+  /* ── Nav solidify ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Smooth scroll for cat nav ── */
+  window.scrollTo = function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 140;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -44px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Cat nav scroll-spy ── */
+  const catSections = document.querySelectorAll('[data-cat]');
+  const catLinks    = document.querySelectorAll('.cat-lnk');
+  const catObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const c = e.target.dataset.cat;
+        catLinks.forEach(l => l.classList.toggle('active', l.dataset.cat === c));
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-120px 0px -38% 0px' });
+  catSections.forEach(s => catObserver.observe(s));
+
+  /* ── Curry tabs ── */
+  document.querySelectorAll('.curr-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.curr-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.panel).classList.add('active');
+    });
+  });
+
+  /* ── Tweaks ── */
+  const twPanel  = document.getElementById('tw-panel');
+  const twToggle = document.getElementById('tw-tog');
+  const twClose  = document.getElementById('tw-x');
+
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode')   { twPanel.classList.add('open');    twToggle.classList.add('hidden'); }
+    if (e.data?.type === '__deactivate_edit_mode') { twPanel.classList.remove('open'); twToggle.classList.remove('hidden'); }
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  twToggle.addEventListener('click', () => { twPanel.classList.add('open'); twToggle.classList.add('hidden'); });
+  twClose.addEventListener('click',  () => {
+    twPanel.classList.remove('open'); twToggle.classList.remove('hidden');
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  });
+
+  /* Accent */
+  document.querySelectorAll('.tw-sw').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('.tw-sw').forEach(s => s.classList.remove('on'));
+      sw.classList.add('on');
+      document.documentElement.style.setProperty('--saffron', sw.dataset.c);
+    });
+  });
+
+  /* Spacing */
+  document.querySelectorAll('[data-sp]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-sp]').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const p = btn.dataset.sp === 'airy' ? '196px' : '152px';
+      document.querySelectorAll('#biryani,#curries,#kebabs,#desserts,#chef,#beverages').forEach(s => {
+        s.style.paddingTop = p; s.style.paddingBottom = p;
+      });
+    });
+  });
+
+  /* Price visibility */
+  document.querySelectorAll('[data-pr]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-pr]').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const vis = btn.dataset.pr === 'hide' ? 'hidden' : 'visible';
+      document.querySelectorAll('.st-price,.bi-portions,.ci-price,.kt-price,.dt-price,.bv-price').forEach(el => {
+        el.style.visibility = vis;
+      });
+    });
+  });
+</script>
+</body>
+</html>

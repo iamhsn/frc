@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Reservations — Falaknuma Royal Cuisine</title>
+  <meta name="description" content="Reserve your table at Falaknuma — authentic royal Hyderabadi cuisine in Kalyan Nagar, Bengaluru. Intimate dinners, family feasts, and private events welcome.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="falaknuma.css">
+  <style>
+  /* ══════════════════════════════════════════════
+     CONTACT PAGE — FALAKNUMA
+  ══════════════════════════════════════════════ */
+
+  /* ── Hero ── */
+  #ch-hero {
+    height: 70vh; min-height: 580px;
+    display: flex; align-items: flex-end;
+    position: relative; overflow: hidden; background: var(--ink);
+  }
+  .ch-bg { position: absolute; inset: 0; }
+  .ch-bg image-slot {
+    width: 100%; height: 100%; display: block;
+    animation: chZoom 22s ease-in-out infinite alternate; transform-origin: center 60%;
+  }
+  @keyframes chZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+  .ch-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(118deg, rgba(10,7,5,0.94) 0%, rgba(40,5,12,0.72) 46%, rgba(10,7,5,0.44) 100%),
+      radial-gradient(ellipse at 18% 72%, rgba(122,0,27,0.28) 0%, transparent 52%);
+  }
+  .ch-vignette {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(10,7,5,0.24) 0%, transparent 36%, rgba(10,7,5,0.62) 100%);
+  }
+  .ch-content {
+    position: relative; z-index: 2;
+    padding: 0 88px 100px; max-width: 860px;
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1100ms var(--ease), transform 1100ms var(--ease);
+  }
+  body.ready .ch-content { opacity: 1; transform: none; }
+  .ch-eyebrow {
+    font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: rgba(199,170,144,0.5); display: block; margin-bottom: 30px;
+  }
+  .ch-headline {
+    font-family: var(--ff-d); font-size: clamp(46px, 6.8vw, 90px);
+    font-weight: 700; color: #fff; line-height: 0.94; margin-bottom: 28px;
+  }
+  .ch-sub {
+    font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.46);
+    line-height: 1.9; max-width: 520px; margin-bottom: 52px;
+  }
+  .ch-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .ch-lnk {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(199,170,144,0.55); position: relative; padding-bottom: 3px;
+    transition: color 300ms; text-decoration: none;
+  }
+  .ch-lnk::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--beige); transform: scaleX(0);
+    transform-origin: left; transition: transform 380ms var(--ease);
+  }
+  .ch-lnk:hover { color: var(--beige); }
+  .ch-lnk:hover::after { transform: scaleX(1); }
+
+  /* ── Tonight Strip ── */
+  #tonight {
+    background: rgba(165,58,22,0.96); overflow: hidden;
+  }
+  .tn-inner {
+    display: flex; align-items: center; padding: 15px 56px; gap: 32px;
+  }
+  .tn-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase;
+    color: rgba(255,255,255,0.72); white-space: nowrap; flex-shrink: 0;
+    padding-right: 32px; border-right: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; gap: 9px;
+  }
+  .tn-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #fff;
+    animation: tnPulse 2s ease-in-out infinite;
+  }
+  @keyframes tnPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .tn-track { overflow: hidden; flex: 1; height: 22px; position: relative; }
+  .tn-msgs { position: absolute; top: 0; left: 0; width: 100%; }
+  .tn-msg {
+    font-family: var(--ff-d); font-style: italic;
+    font-size: 14px; color: rgba(255,255,255,0.88);
+    line-height: 22px; height: 22px; white-space: nowrap;
+    position: absolute; top: 0; left: 0; width: 100%;
+    opacity: 0; transition: opacity 600ms, transform 600ms var(--ease);
+    transform: translateY(8px);
+  }
+  .tn-msg.visible { opacity: 1; transform: translateY(0); }
+  .tn-msg.out { opacity: 0; transform: translateY(-8px); }
+
+  /* ── Contact Cards ── */
+  #cg { background: var(--ink); padding: 108px 56px; }
+  .cg-wrap { max-width: 1380px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .cg-card {
+    background: rgba(255,255,255,0.03); padding: 64px 52px;
+    border: 1px solid rgba(199,170,144,0.07);
+    transition: background 380ms var(--ease);
+  }
+  .cg-card:hover { background: rgba(199,170,144,0.04); }
+  .cg-glyph { font-size: 18px; color: rgba(199,170,144,0.28); margin-bottom: 36px; display: block; line-height: 1; }
+  .cg-title {
+    font-family: var(--ff-d); font-size: 28px; font-weight: 600;
+    color: #fff; margin-bottom: 26px; line-height: 1.0;
+  }
+  .cg-body {
+    font-size: 15px; font-weight: 300; color: rgba(199,170,144,0.48);
+    line-height: 2.1; margin-bottom: 40px;
+  }
+  .cg-body strong { color: rgba(199,170,144,0.8); font-weight: 400; display: block; }
+  .cg-note { font-family: var(--ff-d); font-style: italic; font-size: 13px; color: rgba(199,170,144,0.32); margin-top: 12px; }
+  .cg-cta {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--beige); opacity: 0.52; display: inline-flex; align-items: center; gap: 10px;
+    transition: opacity 300ms, gap 300ms; text-decoration: none;
+    background: none; border: none; cursor: pointer; padding: 0;
+  }
+  .cg-card:hover .cg-cta { opacity: 1; gap: 18px; }
+
+  /* ── Map ── */
+  #map-sec { background: var(--sand); }
+  .map-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 660px; }
+  .map-left {
+    padding: 112px 72px; display: flex; flex-direction: column;
+    justify-content: center; background: var(--sand);
+  }
+  .map-hl {
+    font-family: var(--ff-d); font-size: clamp(38px, 4.4vw, 60px);
+    font-weight: 700; color: var(--charcoal); line-height: 1.0; margin-bottom: 30px;
+  }
+  .map-hl em { font-style: italic; color: var(--saffron); }
+  .map-body {
+    font-size: 17px; font-weight: 300; color: rgba(42,42,42,0.5);
+    line-height: 1.9; max-width: 420px; margin-bottom: 44px;
+  }
+  .map-deets { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .md-row { display: flex; gap: 14px; align-items: flex-start; }
+  .md-bullet { font-size: 8px; color: var(--saffron); opacity: 0.6; margin-top: 6px; flex-shrink: 0; }
+  .md-text { font-size: 14px; font-weight: 300; color: rgba(42,42,42,0.54); line-height: 1.64; }
+  .map-right { position: relative; overflow: hidden; background: #100d0b; }
+  .map-right iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    filter: grayscale(100%) invert(100%) sepia(18%) hue-rotate(170deg) contrast(82%) brightness(0.84);
+    opacity: 0.88;
+  }
+  .map-cta-pill {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 2; white-space: nowrap;
+  }
+
+  /* ── Reservation Form ── */
+  #reservation { background: var(--cream); padding: 152px 56px; }
+  .rf-wrap { max-width: 1380px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.16fr; gap: 104px; align-items: start; }
+  .rf-left { position: sticky; top: 144px; }
+  .rf-tagline {
+    font-family: var(--ff-d); font-style: italic;
+    font-size: clamp(17px, 1.8vw, 22px); color: rgba(42,42,42,0.38);
+    line-height: 1.8; margin-bottom: 18px;
+  }
+  .rf-hl {
+    font-family: var(--ff-d); font-size: clamp(50px, 5.8vw, 78px);
+    font-weight: 700; color: var(--charcoal); line-height: 0.92; margin-bottom: 32px;
+  }
+  .rf-desc {
+    font-size: 16px; font-weight: 300; color: rgba(42,42,42,0.46);
+    line-height: 1.9; max-width: 400px; margin-bottom: 52px;
+  }
+  .rf-promises { display: flex; flex-direction: column; gap: 16px; }
+  .rp-row { display: flex; align-items: center; gap: 14px; }
+  .rp-mark { width: 4px; height: 4px; border-radius: 50%; background: var(--saffron); opacity: 0.52; flex-shrink: 0; }
+  .rp-text { font-size: 13px; font-weight: 300; color: rgba(42,42,42,0.46); }
+
+  /* Form box */
+  .rf-box { background: #fff; padding: 64px 60px; border: 1px solid rgba(42,42,42,0.06); }
+  .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+  .f-col { margin-bottom: 28px; }
+  .f-field { display: flex; flex-direction: column; gap: 10px; }
+  .f-lbl {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(42,42,42,0.32);
+  }
+  .f-input {
+    border: none; border-bottom: 1px solid rgba(42,42,42,0.14);
+    padding: 13px 0; font-family: var(--ff-b); font-size: 15px; font-weight: 300;
+    color: var(--charcoal); background: transparent; outline: none; width: 100%;
+    transition: border-color 300ms;
+  }
+  .f-input:focus { border-color: var(--saffron); }
+  .f-input::placeholder { color: rgba(42,42,42,0.28); }
+  textarea.f-input { resize: none; min-height: 86px; }
+  select.f-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+
+  /* Chips */
+  .chip-lbl {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(42,42,42,0.32); display: block; margin-bottom: 14px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 9px 20px; border: 1px solid rgba(42,42,42,0.13);
+    font-family: var(--ff-b); font-size: 13px; font-weight: 300;
+    color: rgba(42,42,42,0.48); cursor: pointer; background: none;
+    transition: all 240ms; white-space: nowrap;
+  }
+  .chip:hover:not(.on) { border-color: rgba(42,42,42,0.3); color: var(--charcoal); }
+  .chip.on { background: var(--saffron); border-color: var(--saffron); color: #fff; }
+
+  .f-div { height: 1px; background: rgba(42,42,42,0.07); margin: 34px 0; }
+  .f-submit {
+    width: 100%; padding: 20px; background: var(--charcoal);
+    font-family: var(--ff-b); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.26em; text-transform: uppercase; color: #fff;
+    border: none; cursor: pointer; transition: background 380ms var(--ease); margin-top: 6px;
+  }
+  .f-submit:hover { background: var(--saffron); }
+  .f-note {
+    font-size: 12px; font-weight: 300; color: rgba(42,42,42,0.3);
+    text-align: center; margin-top: 18px; line-height: 1.7;
+  }
+
+  /* Success */
+  #f-success {
+    display: none; text-align: center; padding: 88px 40px;
+  }
+  .fs-gem { font-size: 26px; color: rgba(165,58,22,0.4); display: block; margin-bottom: 28px; }
+  .fs-title { font-family: var(--ff-d); font-size: 36px; font-weight: 700; color: var(--charcoal); margin-bottom: 16px; }
+  .fs-sub { font-size: 15px; font-weight: 300; color: rgba(42,42,42,0.44); line-height: 1.84; max-width: 360px; margin: 0 auto; }
+
+  /* ── Philosophy ── */
+  #philosophy { background: var(--charcoal); padding: 156px 56px; position: relative; overflow: hidden; }
+  .ph-pat {
+    position: absolute; inset: 0; opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect x='1' y='1' width='78' height='78' fill='none' stroke='%23C7AA90' stroke-width='0.5'/%3E%3Cpolygon points='40,3 77,40 40,77 3,40' fill='none' stroke='%23C7AA90' stroke-width='0.5'/%3E%3C/svg%3E");
+  }
+  .ph-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; position: relative; z-index: 1; }
+  .ph-img { height: 560px; overflow: hidden; }
+  .ph-img image-slot { width: 100%; height: 100%; display: block; }
+  .ph-em {
+    font-family: var(--ff-d); font-style: italic; font-size: clamp(16px, 1.8vw, 21px);
+    color: rgba(199,170,144,0.4); display: block; margin-bottom: 12px;
+  }
+  .ph-hl {
+    font-family: var(--ff-d); font-size: clamp(44px, 5.2vw, 70px);
+    font-weight: 700; color: var(--sand); line-height: 0.94; margin-bottom: 34px;
+  }
+  .ph-body {
+    font-size: 17px; font-weight: 300; color: rgba(233,223,216,0.44);
+    line-height: 1.96; margin-bottom: 52px;
+  }
+  .ph-rule { width: 52px; height: 1px; background: rgba(165,58,22,0.5); }
+
+  /* ── Private Dining ── */
+  #private { background: var(--sand); padding: 140px 56px; }
+  .pvt-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 84px; align-items: center; }
+  .pvt-img { height: 520px; overflow: hidden; }
+  .pvt-img image-slot { width: 100%; height: 100%; display: block; transition: transform 1200ms var(--ease); }
+  .pvt-img:hover image-slot { transform: scale(1.03); }
+  .pvt-hl {
+    font-family: var(--ff-d); font-size: clamp(40px, 4.8vw, 64px);
+    font-weight: 700; color: var(--charcoal); line-height: 0.92; margin-bottom: 26px;
+  }
+  .pvt-body {
+    font-size: 17px; font-weight: 300; color: rgba(42,42,42,0.5);
+    line-height: 1.9; margin-bottom: 36px;
+  }
+  .pvt-list { display: flex; flex-direction: column; gap: 13px; margin-bottom: 52px; }
+  .pvt-item {
+    font-size: 14px; font-weight: 300; color: rgba(42,42,42,0.52);
+    padding-left: 20px; position: relative; line-height: 1.5;
+  }
+  .pvt-item::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 8px; height: 1px; background: var(--saffron); opacity: 0.48; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--cream); padding: 140px 56px; }
+  .faq-wrap { max-width: 860px; margin: 0 auto; }
+  .faq-hd { margin-bottom: 72px; }
+  .faq-hl { font-family: var(--ff-d); font-size: clamp(40px, 4.6vw, 60px); font-weight: 700; color: var(--charcoal); line-height: 0.94; }
+  .faq-item { border-top: 1px solid rgba(42,42,42,0.08); }
+  .faq-item:last-child { border-bottom: 1px solid rgba(42,42,42,0.08); }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 0; background: none; border: none; cursor: pointer; gap: 24px; text-align: left;
+  }
+  .faq-qt { font-family: var(--ff-d); font-size: 20px; font-weight: 600; color: var(--charcoal); line-height: 1.2; }
+  .faq-icon { font-size: 22px; color: rgba(42,42,42,0.26); flex-shrink: 0; transition: transform 380ms var(--ease), color 300ms; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--saffron); }
+  .faq-body { max-height: 0; overflow: hidden; transition: max-height 500ms var(--ease); }
+  .faq-ans {
+    font-size: 15px; font-weight: 300; color: rgba(42,42,42,0.5);
+    line-height: 1.88; padding-bottom: 30px; max-width: 660px;
+  }
+  .faq-item.open .faq-body { max-height: 200px; }
+
+  /* ── Final CTA ── */
+  #final-cta {
+    min-height: 82vh; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; background: var(--ink); text-align: center;
+  }
+  .fc-bg { position: absolute; inset: 0; }
+  .fc-bg image-slot { width: 100%; height: 100%; display: block; animation: chZoom 28s ease-in-out infinite alternate; }
+  .fc-overlay {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 46%, rgba(122,0,27,0.18) 0%, transparent 58%),
+      linear-gradient(180deg, rgba(10,7,5,0.76) 0%, rgba(10,7,5,0.58) 50%, rgba(10,7,5,0.88) 100%);
+  }
+  .fc-content { position: relative; z-index: 2; padding: 0 56px; max-width: 940px; }
+  .fc-em {
+    font-family: var(--ff-d); font-style: italic;
+    font-size: clamp(22px, 3vw, 40px); color: rgba(255,255,255,0.46);
+    line-height: 1.3; display: block; margin-bottom: 18px;
+  }
+  .fc-hl {
+    font-family: var(--ff-d); font-size: clamp(58px, 9vw, 120px);
+    font-weight: 700; color: #fff; line-height: 0.89; margin-bottom: 60px;
+  }
+  .fc-acts { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+
+  /* ── Mobile bar ── */
+  #mob-bar {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+    background: rgba(10,7,5,0.97); backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(199,170,144,0.1);
+    padding: 12px 16px env(safe-area-inset-bottom, 12px);
+    grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+  }
+  .mb-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; padding: 13px 8px; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(199,170,144,0.1); text-decoration: none; transition: background 240ms;
+  }
+  .mb-btn:active { background: rgba(199,170,144,0.1); }
+  .mb-i { font-size: 17px; color: rgba(199,170,144,0.55); }
+  .mb-l { font-family: var(--ff-b); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(199,170,144,0.44); }
+  .mb-btn.prime { background: var(--saffron); border-color: var(--saffron); }
+  .mb-btn.prime .mb-i, .mb-btn.prime .mb-l { color: #fff; }
+  @media (max-width: 768px) { #mob-bar { display: grid; } body { padding-bottom: 86px; } }
+
+  /* ── Tweaks ── */
+  #cp-panel {
+    display: none; position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    background: rgba(10,7,5,0.97); backdrop-filter: blur(20px);
+    border: 1px solid rgba(199,170,144,0.18); padding: 28px 28px 24px;
+    width: 264px; box-shadow: 0 24px 64px rgba(0,0,0,0.55);
+  }
+  #cp-panel.open { display: block; }
+  .cp-hd { font-family: var(--ff-b); font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--beige); opacity: 0.7; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .cp-x { background: none; border: none; color: rgba(199,170,144,0.5); cursor: pointer; font-size: 18px; padding: 0; line-height: 1; transition: color 200ms; }
+  .cp-x:hover { color: var(--beige); }
+  .cp-g { margin-bottom: 20px; }
+  .cp-l { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(199,170,144,0.42); display: block; margin-bottom: 10px; }
+  .cp-sws { display: flex; gap: 10px; }
+  .cp-sw { width: 32px; height: 32px; cursor: pointer; border: 2px solid transparent; transition: border-color 200ms; }
+  .cp-sw.on { border-color: #fff; }
+  .cp-os { display: flex; gap: 2px; }
+  .cp-o { flex: 1; padding: 9px 4px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: rgba(233,223,216,0.5); font-family: var(--ff-b); font-size: 11px; letter-spacing: 0.06em; cursor: pointer; text-align: center; transition: all 200ms; }
+  .cp-o.on, .cp-o:hover { background: rgba(199,170,144,0.14); color: var(--sand); border-color: rgba(199,170,144,0.28); }
+  #cp-tog { position: fixed; bottom: 28px; right: 28px; z-index: 199; background: rgba(10,7,5,0.9); border: 1px solid rgba(199,170,144,0.2); color: rgba(199,170,144,0.55); font-family: var(--ff-b); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; padding: 11px 18px; cursor: pointer; transition: all 300ms; backdrop-filter: blur(12px); }
+  #cp-tog:hover { color: var(--beige); border-color: rgba(199,170,144,0.44); }
+  #cp-tog.hidden { display: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .cg-wrap { grid-template-columns: 1fr; }
+    .map-grid { grid-template-columns: 1fr; }
+    .map-right { min-height: 420px; position: relative; }
+    .map-right iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .rf-wrap { grid-template-columns: 1fr; gap: 56px; }
+    .rf-left { position: static; }
+    .ph-wrap { grid-template-columns: 1fr; }
+    .ph-img { height: 360px; }
+    .pvt-wrap { grid-template-columns: 1fr; }
+    .pvt-img { height: 360px; }
+  }
+  @media (max-width: 768px) {
+    .ch-content { padding: 0 24px 72px; }
+    #cg, #reservation, #philosophy, #private, #faq { padding-left: 24px !important; padding-right: 24px !important; }
+    .map-left { padding: 72px 24px; }
+    .cg-card { padding: 48px 32px; }
+    .rf-box { padding: 40px 28px; }
+    .f-row { grid-template-columns: 1fr; }
+    .tn-inner { padding: 14px 24px; }
+    .fc-content { padding: 0 24px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════ NAV -->
+<nav id="nav">
+  <a href="Homepage.html" class="nav-logo" aria-label="Falaknuma home" style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;">
+    <span style="font-family:var(--ff-d);font-size:20px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#fff;line-height:1;">Falaknuma</span>
+    <span style="font-family:var(--ff-b);font-size:8px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(199,170,144,0.65);line-height:1;">Royal Cuisine</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="Homepage.html#story">Our Story</a></li>
+    <li><a href="Menu.html">The Menu</a></li>
+    <li><a href="Homepage.html#gallery">Gallery</a></li>
+    <li><a href="Contact.html" style="color:var(--beige);">Contact</a></li>
+  </ul>
+  <a href="#reservation" class="nav-btn">Reserve a Table</a>
+</nav>
+
+<!-- ════════════════════════ HERO -->
+<section id="ch-hero">
+  <div class="ch-bg">
+    <image-slot id="ch-bg-img" placeholder="Warm candlelit dining room — copper handi on table, lantern glow, deep maroon shadows, intimate atmosphere" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+  </div>
+  <div class="ch-overlay"></div>
+  <div class="ch-vignette"></div>
+  <div class="ch-content">
+    <span class="ch-eyebrow">Kalyan Nagar · Bengaluru</span>
+    <h1 class="ch-headline" id="hero-hl">A royal<br>table awaits.</h1>
+    <p class="ch-sub">Whether it's an intimate dinner, a family gathering, or your first taste of authentic Hyderabadi cuisine — Falaknuma welcomes you with warmth, heritage, and timeless hospitality.</p>
+    <div class="ch-actions">
+      <a href="#reservation" class="btn-saffron">Reserve a Table</a>
+      <a href="Menu.html" class="ch-lnk">View Menu</a>
+      <a href="#map-sec" class="ch-lnk">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ TONIGHT STRIP -->
+<div id="tonight" aria-live="polite" aria-label="Tonight at Falaknuma">
+  <div class="tn-inner">
+    <span class="tn-label"><span class="tn-dot" aria-hidden="true"></span>Tonight at Falaknuma</span>
+    <div class="tn-track">
+      <div class="tn-msgs" id="tn-msgs">
+        <p class="tn-msg visible">Fresh Gosht Dum Biryani — available for lunch &amp; dinner tonight</p>
+        <p class="tn-msg">Weekend Special: Nalli Nihari with tandoor roti — served from 7 PM</p>
+        <p class="tn-msg">Live Desserts Counter — Shahi Firni &amp; Qubani ka Meetha all evening</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ CONTACT CARDS -->
+<section id="cg">
+  <div class="cg-wrap">
+
+    <div class="cg-card reveal">
+      <span class="cg-glyph">◈</span>
+      <h2 class="cg-title">Visit Falaknuma</h2>
+      <div class="cg-body">
+        <strong>2nd Floor, Surya Arcade</strong>
+        Kammanahalli, CMR Main Road<br>
+        Kalyan Nagar, Bengaluru 560043
+      </div>
+      <a href="https://maps.google.com/?q=Kammanahalli+CMR+Main+Road+Kalyan+Nagar+Bengaluru" target="_blank" rel="noopener" class="cg-cta">Open in Maps →</a>
+    </div>
+
+    <div class="cg-card reveal d1">
+      <span class="cg-glyph">◎</span>
+      <h2 class="cg-title">Reservations</h2>
+      <div class="cg-body">
+        <strong>+91 XXXXX XXXXX</strong>
+        reservations@falaknuma.in<br>
+        <br>For private events &amp; group bookings,<br>please reach out by email.
+      </div>
+      <a href="tel:+910000000000" class="cg-cta">Call Now →</a>
+    </div>
+
+    <div class="cg-card reveal d2">
+      <span class="cg-glyph">◷</span>
+      <h2 class="cg-title">Hours of Hospitality</h2>
+      <div class="cg-body">
+        <strong>Mon — Thu</strong>
+        12 PM — 11 PM<br>
+        <br>
+        <strong>Fri — Sun</strong>
+        12 PM — 12 AM
+        <p class="cg-note">Late-night biryani cravings welcome.</p>
+      </div>
+      <a href="#reservation" class="cg-cta">Reserve a Table →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ MAP -->
+<section id="map-sec">
+  <div class="map-grid">
+
+    <div class="map-left">
+      <span class="sec-label reveal">Finding Us</span>
+      <h2 class="map-hl reveal d1">In the heart of<br>Bengaluru, a taste<br>of <em>Hyderabad</em> awaits.</h2>
+      <p class="map-body reveal d2">Located in Kammanahalli, Falaknuma brings together royal recipes, warm hospitality, and timeless Hyderabadi flavours in an elegant dining setting.</p>
+      <div class="map-deets reveal d2">
+        <div class="md-row"><span class="md-bullet">▸</span><span class="md-text">2nd Floor, Surya Arcade, CMR Main Road, Kammanahalli, Bengaluru 560043</span></div>
+        <div class="md-row"><span class="md-bullet">▸</span><span class="md-text">Street parking on CMR Main Road · Valet on request for events</span></div>
+        <div class="md-row"><span class="md-bullet">▸</span><span class="md-text">5 min from Kalyan Nagar Bus Stand · Auto &amp; cab-friendly</span></div>
+      </div>
+      <a href="https://maps.google.com/?q=Kammanahalli+CMR+Main+Road+Kalyan+Nagar+Bengaluru" target="_blank" rel="noopener" class="btn-saffron reveal d3" style="display:inline-block;">Get Directions →</a>
+    </div>
+
+    <div class="map-right">
+      <iframe
+        title="Falaknuma location — Kammanahalli, Bengaluru"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=77.6263%2C13.013%2C77.6543%2C13.033&layer=mapnik&marker=13.023%2C77.6403"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+      <div class="map-cta-pill">
+        <a href="https://maps.google.com/?q=Kammanahalli+Bengaluru" target="_blank" rel="noopener" class="btn-saffron" style="display:inline-block;">Open in Google Maps</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ RESERVATION FORM -->
+<section id="reservation">
+  <div class="rf-wrap">
+
+    <div class="rf-left">
+      <span class="sec-label reveal">Reserve Your Experience</span>
+      <p class="rf-tagline reveal d1">"Your Dastarkhwan awaits."</p>
+      <h2 class="rf-hl reveal d2">Join Us For<br>A Royal Feast.</h2>
+      <p class="rf-desc reveal d3">From intimate dinners to celebratory gatherings, allow us to prepare an unforgettable dining experience for you.</p>
+      <div class="rf-promises reveal d3">
+        <div class="rp-row"><span class="rp-mark"></span><span class="rp-text">Reservation confirmed within two hours</span></div>
+        <div class="rp-row"><span class="rp-mark"></span><span class="rp-text">Personal concierge for special occasions</span></div>
+        <div class="rp-row"><span class="rp-mark"></span><span class="rp-text">Dietary preferences accommodated on request</span></div>
+        <div class="rp-row"><span class="rp-mark"></span><span class="rp-text">Private dining room for gatherings up to 30</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="rf-box reveal" id="rf-box">
+        <form id="rf-form" novalidate autocomplete="on">
+
+          <div class="f-row">
+            <div class="f-field">
+              <label class="f-lbl" for="f-name">Full Name</label>
+              <input class="f-input" id="f-name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="f-field">
+              <label class="f-lbl" for="f-phone">Phone</label>
+              <input class="f-input" id="f-phone" name="phone" type="tel" placeholder="+91 00000 00000" required>
+            </div>
+          </div>
+
+          <div class="f-row">
+            <div class="f-field">
+              <label class="f-lbl" for="f-email">Email</label>
+              <input class="f-input" id="f-email" name="email" type="email" placeholder="you@email.com">
+            </div>
+            <div class="f-field">
+              <label class="f-lbl" for="f-guests">Guests</label>
+              <select class="f-input" id="f-guests" name="guests" required>
+                <option value="" disabled selected>How many?</option>
+                <option value="1">1 — Just me</option>
+                <option value="2">2 — Intimate dinner</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7-10">7–10 — Small gathering</option>
+                <option value="10+">10+ — Private event</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="f-row">
+            <div class="f-field">
+              <label class="f-lbl" for="f-date">Date</label>
+              <input class="f-input" id="f-date" name="date" type="date" required>
+            </div>
+          </div>
+
+          <div class="f-col">
+            <span class="chip-lbl">Preferred Time</span>
+            <div class="chips">
+              <button type="button" class="chip" data-grp="time" data-val="12:00">12 PM</button>
+              <button type="button" class="chip" data-grp="time" data-val="13:00">1 PM</button>
+              <button type="button" class="chip" data-grp="time" data-val="19:00">7 PM</button>
+              <button type="button" class="chip" data-grp="time" data-val="20:00">8 PM</button>
+              <button type="button" class="chip" data-grp="time" data-val="21:00">9 PM</button>
+              <button type="button" class="chip" data-grp="time" data-val="22:00">10 PM</button>
+            </div>
+          </div>
+          <input type="hidden" id="f-time" name="time">
+
+          <div class="f-div"></div>
+
+          <div class="f-col">
+            <span class="chip-lbl">Occasion</span>
+            <div class="chips">
+              <button type="button" class="chip" data-grp="occ" data-val="family">Family Dinner</button>
+              <button type="button" class="chip" data-grp="occ" data-val="celebration">Celebration</button>
+              <button type="button" class="chip" data-grp="occ" data-val="business">Business Dinner</button>
+              <button type="button" class="chip" data-grp="occ" data-val="first">First Visit</button>
+              <button type="button" class="chip" data-grp="occ" data-val="dawat">Weekend Dawat</button>
+            </div>
+          </div>
+          <input type="hidden" id="f-occ" name="occasion">
+
+          <div class="f-div"></div>
+
+          <div class="f-col f-field">
+            <label class="f-lbl" for="f-notes">Special Requests</label>
+            <textarea class="f-input" id="f-notes" name="notes" placeholder="Dietary requirements, seating preferences, occasion details…" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="f-submit">Reserve Experience</button>
+          <p class="f-note">We'll confirm within two hours. For urgent bookings, please call us directly.</p>
+
+        </form>
+        <div id="f-success">
+          <span class="fs-gem">✦</span>
+          <h3 class="fs-title">Your table is reserved.</h3>
+          <p class="fs-sub">We'll confirm your reservation at Falaknuma within two hours. We look forward to welcoming you with warmth and hospitality.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ PHILOSOPHY -->
+<section id="philosophy">
+  <div class="ph-pat"></div>
+  <div class="ph-wrap">
+    <div class="ph-img reveal">
+      <image-slot id="ph-img" placeholder="Chef's hands presenting biryani — close, candlelit, warm copper tones, generous hospitality gesture" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div class="ph-text">
+      <span class="sec-label sec-label--light reveal">Our Philosophy</span>
+      <span class="ph-em reveal d1">Rooted in tradition.</span>
+      <h2 class="ph-hl reveal d1">Served<br>with soul.</h2>
+      <p class="ph-body reveal d2">At Falaknuma, hospitality is more than service — it is a legacy. Every dish, every aroma, and every table is prepared with the warmth and generosity that define authentic Hyderabadi dining.</p>
+      <div class="ph-rule reveal d3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ PRIVATE DINING -->
+<section id="private">
+  <div class="pvt-wrap">
+    <div class="pvt-img reveal">
+      <image-slot id="pvt-img" placeholder="Elegant private dining — long table set for a feast, lanterns, copper vessels, intimate warmth" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div>
+      <span class="sec-label reveal">Private &amp; Group Dining</span>
+      <h2 class="pvt-hl reveal d1">Gather Around<br>Royal Flavours.</h2>
+      <p class="pvt-body reveal d2">Host intimate celebrations, family gatherings, and special evenings with curated Hyderabadi feasts crafted for memorable occasions.</p>
+      <div class="pvt-list reveal d2">
+        <span class="pvt-item">Dedicated private dining room — up to 30 guests</span>
+        <span class="pvt-item">Curated dastarkhwan menus crafted on request</span>
+        <span class="pvt-item">Corporate lunches, birthdays &amp; anniversaries</span>
+        <span class="pvt-item">Custom décor &amp; live music arrangements available</span>
+      </div>
+      <a href="mailto:reservations@falaknuma.in" class="btn-saffron reveal d3" style="display:inline-block;">Enquire for Gatherings</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ FAQ -->
+<section id="faq">
+  <div class="faq-wrap">
+    <div class="faq-hd">
+      <span class="sec-label reveal">Common Questions</span>
+      <h2 class="faq-hl reveal d1">Everything<br>You May Need.</h2>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Do you accept reservations?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Yes — we warmly recommend reserving in advance, especially for weekend dinners. You can book through this page, call us directly, or write to reservations@falaknuma.in. Walk-ins are welcome subject to availability.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Is parking available?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Street parking is available on CMR Main Road. Valet service is available on request for special occasions and private dining events. We are conveniently accessible by auto-rickshaw, cab, and Metro as well.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Do you offer family seating?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Absolutely. Family dining is at the heart of Hyderabadi culture and we've designed our space to welcome large gatherings warmly. We offer both main dining room seating and a private room for groups up to 30. Please mention your group size when reserving.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Are vegetarian options available?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Yes. While Hyderabadi cuisine has deep roots in meat-based preparations, our menu includes vegetarian biryanis, paneer dishes, and traditional vegetarian sides crafted with the same heritage and care. Please inform us of dietary requirements when booking.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Is takeaway available?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Yes — takeaway is available during operating hours. Some dishes, particularly the dum biryani, are best experienced fresh off the handi. We recommend calling ahead to ensure your meal is prepared at its finest.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false"><span class="faq-qt">Do you host private events?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+      <div class="faq-body" role="region"><p class="faq-ans">Yes — from intimate birthday dinners to corporate lunches and milestone celebrations, we offer a dedicated private dining experience with a customised menu, décor, and service. Write to reservations@falaknuma.in with your requirements and we'll be in touch.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════ FINAL CTA -->
+<section id="final-cta">
+  <div class="fc-bg">
+    <image-slot id="fc-bg" placeholder="Dramatic overhead dastarkhwan — full Hyderabadi feast spread, warm golden candlelight, rich textures and copper vessels" shape="rect" style="width:100%;height:100%;display:block;"></image-slot>
+  </div>
+  <div class="fc-overlay"></div>
+  <div class="fc-content reveal">
+    <span class="fc-em">Come hungry.</span>
+    <h2 class="fc-hl">Leave with<br>memories.</h2>
+    <div class="fc-acts">
+      <a href="#reservation" class="btn-saffron">Reserve a Table</a>
+      <a href="Menu.html" class="btn-ghost">View the Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <p class="ft-logo">Falaknuma</p>
+        <p class="ft-tagline">Authentic Hyderabadi cuisine, crafted with heritage, hospitality, and timeless flavour. Now in Bengaluru.</p>
+      </div>
+      <div>
+        <span class="ft-col-title">Navigate</span>
+        <ul class="ft-links">
+          <li><a href="Homepage.html">Home</a></li>
+          <li><a href="Menu.html">The Menu</a></li>
+          <li><a href="#reservation">Reservations</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Reserve</span>
+        <ul class="ft-links">
+          <li><a href="#reservation">Table Booking</a></li>
+          <li><a href="#private">Private Events</a></li>
+          <li><a href="#private">Corporate Dining</a></li>
+          <li><a href="mailto:reservations@falaknuma.in">Gift Experiences</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="ft-col-title">Visit</span>
+        <ul class="ft-links">
+          <li><a href="https://maps.google.com/?q=Kammanahalli+Bengaluru" target="_blank" rel="noopener">Kalyan Nagar, Kammanahalli</a></li>
+          <li><a href="#">Bengaluru, Karnataka</a></li>
+          <li><a href="mailto:reservations@falaknuma.in">reservations@falaknuma.in</a></li>
+          <li><a href="tel:+910000000000">+91 80 0000 0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-copy">© 2025 Falaknuma Royal Cuisine. All rights reserved.</p>
+      <div class="ft-social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════ MOBILE BAR -->
+<div id="mob-bar" aria-label="Quick actions">
+  <a href="tel:+910000000000" class="mb-btn">
+    <span class="mb-i">☎</span>
+    <span class="mb-l">Call</span>
+  </a>
+  <a href="https://maps.google.com/?q=Kammanahalli+Bengaluru" target="_blank" rel="noopener" class="mb-btn">
+    <span class="mb-i">◈</span>
+    <span class="mb-l">Directions</span>
+  </a>
+  <a href="#reservation" class="mb-btn prime">
+    <span class="mb-i">✦</span>
+    <span class="mb-l">Reserve</span>
+  </a>
+</div>
+
+<!-- ════════════════════════ TWEAKS -->
+<button id="cp-tog">Tweaks</button>
+<div id="cp-panel">
+  <div class="cp-hd"><span>Tweaks</span><button class="cp-x" id="cp-x">×</button></div>
+  <div class="cp-g">
+    <span class="cp-l">Accent Colour</span>
+    <div class="cp-sws">
+      <div class="cp-sw on" data-c="#A53A16" style="background:#A53A16;" title="Burnt Saffron"></div>
+      <div class="cp-sw" data-c="#7A001B" style="background:#7A001B;" title="Burgundy Reserve"></div>
+      <div class="cp-sw" data-c="#8B6914" style="background:#8B6914;" title="Antique Gold"></div>
+    </div>
+  </div>
+  <div class="cp-g">
+    <span class="cp-l">Hero Headline</span>
+    <div class="cp-os">
+      <button class="cp-o on" data-hl="0">Royal</button>
+      <button class="cp-o" data-hl="1">Dawat</button>
+      <button class="cp-o" data-hl="2">Memory</button>
+    </div>
+  </div>
+  <div class="cp-g">
+    <span class="cp-l">Tonight Strip</span>
+    <div class="cp-os">
+      <button class="cp-o on" data-strip="show">Show</button>
+      <button class="cp-o" data-strip="hide">Hide</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SCRIPTS -->
+<script src="image-slot.js"></script>
+<script>
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => document.body.classList.add('ready'), 80);
+    const d = document.getElementById('f-date');
+    if (d) d.min = new Date().toISOString().split('T')[0];
+  });
+
+  /* ── Nav solidify ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Smooth anchor scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - 88;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -44px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Tonight strip ticker ── */
+  const msgs = document.querySelectorAll('.tn-msg');
+  let cur = 0;
+  setInterval(() => {
+    msgs[cur].classList.remove('visible');
+    msgs[cur].classList.add('out');
+    setTimeout(() => { msgs[cur].classList.remove('out'); }, 600);
+    cur = (cur + 1) % msgs.length;
+    msgs[cur].classList.add('visible');
+  }, 4000);
+
+  /* ── Chip selection ── */
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const grp = chip.dataset.grp;
+      document.querySelectorAll(`[data-grp="${grp}"]`).forEach(c => c.classList.remove('on'));
+      chip.classList.add('on');
+      document.getElementById(grp === 'time' ? 'f-time' : 'f-occ').value = chip.dataset.val;
+    });
+  });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── Form submit ── */
+  document.getElementById('rf-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = document.getElementById('rf-form');
+    const success = document.getElementById('f-success');
+    form.style.transition = 'opacity 400ms';
+    form.style.opacity = '0';
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.style.display = 'block';
+      success.style.opacity = '0';
+      requestAnimationFrame(() => {
+        success.style.transition = 'opacity 700ms';
+        success.style.opacity = '1';
+      });
+    }, 420);
+  });
+
+  /* ── Tweaks ── */
+  const cpPanel  = document.getElementById('cp-panel');
+  const cpToggle = document.getElementById('cp-tog');
+  const cpClose  = document.getElementById('cp-x');
+  const heroHls  = [
+    'A royal<br>table awaits.',
+    'Let the<br>dawat begin.',
+    'Every memorable<br>meal begins here.'
+  ];
+
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode')   { cpPanel.classList.add('open');    cpToggle.classList.add('hidden'); }
+    if (e.data?.type === '__deactivate_edit_mode') { cpPanel.classList.remove('open'); cpToggle.classList.remove('hidden'); }
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  cpToggle.addEventListener('click', () => { cpPanel.classList.add('open'); cpToggle.classList.add('hidden'); });
+  cpClose.addEventListener('click',  () => { cpPanel.classList.remove('open'); cpToggle.classList.remove('hidden'); window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); });
+
+  document.querySelectorAll('.cp-sw').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('.cp-sw').forEach(s => s.classList.remove('on'));
+      sw.classList.add('on');
+      document.documentElement.style.setProperty('--saffron', sw.dataset.c);
+    });
+  });
+
+  document.querySelectorAll('[data-hl]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-hl]').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('hero-hl').innerHTML = heroHls[+btn.dataset.hl];
+    });
+  });
+
+  document.querySelectorAll('[data-strip]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-strip]').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('tonight').style.display = btn.dataset.strip === 'hide' ? 'none' : '';
+    });
+  });
+</script>
+</body>
+</html>
